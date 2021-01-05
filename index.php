@@ -1,9 +1,7 @@
 <?php
 // require __DIR__ . '/folderName/fileName.php';
 // require __DIR__ . '//.php';
-require __DIR__ . '/resources/config.php';
-require __DIR__ . '/resources/templates/header.php';
-
+require __DIR__ . '/libs/config.php';
 
 
 ?>
@@ -16,6 +14,8 @@ require __DIR__ . '/resources/templates/header.php';
     <title>Hacker News</title>
 </head>
 <body>
+    <?php require __DIR__ . '/libs/templates/header.php'; ?>
+
 
 <!-- Alla posts ska hamna i ordered list, eller table, se papper>
     <main>
@@ -26,6 +26,6 @@ require __DIR__ . '/resources/templates/header.php';
 
 -->
 
-<?php require __DIR__ . '/templates/footer.php'; ?>
+<?php require __DIR__ . '/libs/templates/footer.php'; ?>
 </body>
 </html>
