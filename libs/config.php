@@ -1,19 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
-// define PDO - tell about the db file
-$pdo = new PDO('sqlite:hackernews.sqlite');
+// This file contains a list of global configuration settings.
 
-// write sql
-$statement = $pdo->query('SELECT * FROM users');
-
-if (!$statement) {
-    die(var_dump($pdo->errorInfo()));
-}
-
-// run the SQL
-$user = $statement->fetch(PDO::FETCH_ASSOC);
-
-// show it on the screen
-echo $user['name'];
+return [
+    'title' => 'Hacker News',
+    'database_path' => sprintf('sqlite:%s/database/database.db', __DIR__),
+];
 
