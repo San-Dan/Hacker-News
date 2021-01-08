@@ -16,7 +16,7 @@ require __DIR__ . '/../../app/autoload.php';
             <a href="login.php">Latest</a>
             <a href="login.php">Most upvoted</a>
             <a href="login.php">About</a>
-            <?php
+            <?php /*
                 if (isset($_SESSION["useruid"])) {
                     echo "<a href="profile.php">My Profile</a>"; // Ingen html i php ju?? Ha två index-sidor, en med och en utan session?
                     echo "<a href="/../../app/users/logout.php">Sign Out</a>";
@@ -24,7 +24,7 @@ require __DIR__ . '/../../app/autoload.php';
                 else {
                     echo "<a href="login.php">Sign Up</a>";
                     echo "<a href="login.php">Sign In</a>";
-                }
+                } */
             ?>
             <a href="login.php">Sign Up</a>
             <a href="login.php">Sign In</a>

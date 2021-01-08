@@ -16,70 +16,74 @@ require __DIR__ . '/app/autoload.php';
     <?php require __DIR__ . '/libs/templates/header.php'; ?>
 
     <h1>Welcome, hackers!</h1>
-    <section>
+    <section class="signinForm">
         <h2>Sign in here</h2>
         <form action="app/users/signin.php" method="post">
             <label for="username">Username/Email</label>
-            <input type="text" name="name" id="username">
-
+            <input type="text" name="name" id="username" required>
             <label for="password">Password</label>
-            <input type="password" name="pwd" id="password">
-
+            <input type="password" name="pwd" id="password" required>
             <button type="submit" name="submit">SIGN IN</button>
         </form>
+        <div class=errorMsgBox>
+            <p>
         <?php
-        if (isset($_GET["error"])) {
-            if ($_GET["error"] == "wronglogin") {
-                echo "<p>Invalid input. Please, try again!</p>";
+        if (isset($_SESSION["error"])) {
+            if ($_SESSION["error"] == "wronglogin") {
+                echo $_SESSION["error"];
             }
         } ?>
+            </p>
+        </div>
     </section>
 
-    <section>
-    <h2>Register for the latest hacker news!</h2> <!-- action ska va sidan man skickas till som inloggad? !-->
-    <form action="app/users/createAcc.php" method="post">
-        <label for="username">Full Name</label>
-        <input type="text" name="name" id="fullName">
+    <section class="registerForm">
+    <h2>Register for the latest hacker news!</h2> <!-- action ska va sidan man skickas till som inloggad? eller dit dtan skickas = db? !-->
+    <form action="app/users/register.php" method="post">
+        <label for="fullName">Full Name</label>
+        <input type="text" name="name" id="fullName" required>
         <label for="username">Username</label>
-        <input type="text" name="uid" placeholder="Username" id="username">
+        <input type="text" name="uid" placeholder="Username" id="username" required>
         <label for="email">Email</label>
-        <input type="email" name="email" id="email">
+        <input type="email" name="email" id="email" required>
         <label for="password">Password</label>
-        <input type="password" name="pwd" id="password">
+        <input type="password" name="pwd" id="password" required>
         <label for="password">Repeat Password</label>
-        <input type="password" name="pwdRep" id="password">
-        <button type="submit" name="submit">SIGN IN</button>
+        <input type="password" name="pwdRep" id="password" required>
+        <button type="submit" name="submit">SIGN UP</button>
     </form>
+    <div class="errorMsgBox"> <!-- display:none until error is triggered -->
+        <p>
+            <?php // Borde kunna ha sep fil med error message och require här?
+            if (isset($_SESSION["error"])) {
+                if ($_SESSION["error"] == "emptyinput") {
+                    echo $_SESSION["error"];
+                }
+                else if ($_SESSION["error"] == "invalidUid") {
+                    echo $_SESSION["error"];
+                }
 
-    <?php
-// Borde kunna ha sep fil med error message och require här?
-    if (isset($_GET["error"])) {
-        if ($_GET["error"] == "emptyinput") {
-            echo "<p>Fill in all fields, please</p>";
-        }
-        else if ($_GET["error"] == "invalidUid") {
-            echo "<p>Your username is invalid</p>";
-        }
+                else if ($_SESSION["error"] == "invalidEmail") {
+                    echo $_SESSION["error"];
+                }
 
-        else if ($_GET["error"] == "invalidEmail") {
-            echo "<p>Your email is invalid</p>";
-        }
+                else if ($_SESSION["error"] == "noMatchPwd") {
+                    echo $_SESSION["error"];
+                }
 
-        else if ($_GET["error"] == "noMatchPwd") {
-            echo "<p>Your pwd is invalid</p>";
+                else if ($_SESSION["error"] == "stmtfailure") {
+                    echo $_SESSION["error"];
+                }
+                else if ($_SESSION["error"] == "userExists") {
+                    echo $_SESSION["error"];
+            }
+            else if ($_SESSION["error"] == "none") {
+                echo 'Registration successful!';  // Vill skicka till Profile Page
+            }
         }
-
-        else if ($_GET["error"] == "stmtfailure") {
-            echo "<p>Oops, sth went wrong, try again!</p>";
-        }
-        else if ($_GET["error"] == "userExists") {
-            echo "<p>Darn! Your username was so cool it's already been taken</p>";
-    }
-    else if ($_GET["error"] == "none") {
-        echo "<p>Yay, you are signed up!</p>";  // Vill skicka till Profile Page
-    }
-}
-?>
+        ?>
+        </p>
+    </div>
     </section>
 
 
