@@ -7,15 +7,19 @@ require __DIR__ . '/../../app/autoload.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/views/css/global.css">
+    <link rel="stylesheet" href="/views/css/header.css">
+    <link rel="stylesheet" href="/views/css/index.css">
+    <link rel="stylesheet" href="/views/css/footer.css">
+    <link rel="stylesheet" href="/views/css/login.css">
     <title>Hacker News</title>
 </head>
 <body>
     <header>
-        <h1>Hacker News</h1>
+        <h1>.hackernews</h1>
         <nav>
-            <a href="login.php">Latest</a>
-            <a href="login.php">Most upvoted</a>
-            <a href="login.php">About</a>
+            <a href="index.php">Latest</a>
+            <a href="index.php">Most upvoted</a>
             <?php /*
                 if (isset($_SESSION["useruid"])) {
                     echo "<a href="profile.php">My Profile</a>"; // Ingen html i php ju?? Ha två index-sidor, en med och en utan session?

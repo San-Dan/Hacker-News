@@ -10,19 +10,20 @@ require __DIR__ . '/app/autoload.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacker News - Sign In</title>
+
+    <title>.hackernews - Sign In</title>
 </head>
 <body>
     <?php require __DIR__ . '/libs/templates/header.php'; ?>
-
+    <main class="loginMain">
     <h1>Welcome, hackers!</h1>
-    <section class="signinForm">
+    <section class="signinForm formContainer">
         <h2>Sign in here</h2>
         <form action="app/users/signin.php" method="post">
             <label for="username">Username/Email</label>
-            <input type="text" name="name" id="username" required>
+            <input type="text" name="name" placeholder="..." id="username" required>
             <label for="password">Password</label>
-            <input type="password" name="pwd" id="password" required>
+            <input type="password" name="pwd" placeholder="..." id="password" required>
             <button type="submit" name="submit">SIGN IN</button>
         </form>
         <div class=errorMsgBox>
@@ -39,17 +40,17 @@ require __DIR__ . '/app/autoload.php';
 
     <section class="registerForm">
     <h2>Register for the latest hacker news!</h2> <!-- action ska va sidan man skickas till som inloggad? eller dit dtan skickas = db? !-->
-    <form action="app/users/register.php" method="post">
+    <form action="app/users/register.php" method="post" class="formContainer">
         <label for="fullName">Full Name</label>
-        <input type="text" name="name" id="fullName" required>
+        <input type="text" name="name" placeholder="..." id="fullName" required>
         <label for="username">Username</label>
-        <input type="text" name="uid" placeholder="Username" id="username" required>
+        <input type="text" name="uid" placeholder="..." id="username" required>
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" required>
+        <input type="email" name="email" placeholder="..." id="email" required>
         <label for="password">Password</label>
-        <input type="password" name="pwd" id="password" required>
+        <input type="password" name="pwd" placeholder="..." id="password" required>
         <label for="password">Repeat Password</label>
-        <input type="password" name="pwdRep" id="password" required>
+        <input type="password" name="pwdRep" placeholder="..." id="password" required>
         <button type="submit" name="submit">SIGN UP</button>
     </form>
     <div class="errorMsgBox"> <!-- display:none until error is triggered -->
@@ -85,7 +86,7 @@ require __DIR__ . '/app/autoload.php';
         </p>
     </div>
     </section>
-
+    </main>
 
 <?php require __DIR__ . '/libs/templates/footer.php'; ?>
 </body>

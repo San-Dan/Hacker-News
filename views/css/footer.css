@@ -1,0 +1,48 @@
+footer {
+  background-color: var(--header-footer-bg);
+  text-align: center;
+  font-family: 'Arial';
+  font-size: 1.2rem;
+  padding: 15px;
+  height: 80px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 0;
+  }
+
+footer nav{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 10px;
+  line-height: 20px;
+}
+
+nav a {
+  color: black;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 700px) {
+
+  footer {
+    background-color: var(--header-footer-bg);
+    text-align: center;
+    font-family: 'Arial';
+    font-size: 1.5rem;
+    padding: 15px;
+    height: 110px;
+
+    bottom: 0;
+    width: 100%;
+    }
+
+  footer nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 10px;
+  }
+}

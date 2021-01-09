@@ -1,0 +1,54 @@
+.loginMain {
+	display: flex;
+	flex-direction: column;
+  margin-top: 110px;
+  margin-bottom: 100px;
+  margin-left: 30px;
+  max-width: 400px;
+
+  }
+
+h2 {
+  margin: 10px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin-bottom: 2rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5rem;
+}
+
+/* LABELS Name, Email, Question */
+label {
+  font-size: medium;
+  margin-left: 10px;
+}
+
+/* Name+Email, input fields */
+.formContainer input[type="text"],
+.formContainer input[type="email"],
+.formContainer input[type="password"] {
+  width: 80%;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 2rem;
+  background-color: #f1f1f1;
+  resize: none;
+  max-height: 50px;
+  outline: none;
+}
+
+button {
+  border-radius: 5px;
+  max-width: 80px;
+  background-color: var(--signIn-Out-btn);
+  margin-top: 1rem;
+}
