@@ -7,7 +7,8 @@ function redirect(string $path) {
     exit;
 }
 
-// ----------- VALIDATING & CHECKING INPUTS --------------
+// ----------- USER / ACCOUNT FUNCTIONS --------------
+// VALIDATE FORM INPUT
 function emptySignupInput($name, $username, $email, $pwd, $pwdRep) : bool {
     if (empty($name) || empty($username) || empty($email) || empty($pwd) || empty($pwdRep)) {
         return true;
@@ -64,7 +65,7 @@ function pwdMatch(string $pwd, string $pwdRep) : bool {
     }
 }
 
-// --------- LOGIN A USER --------------
+// LOGIN A USER
 function emptyLoginInput(string $username, string $pwd) : bool {
     if (empty($username) || empty($pwd)) {
         return true;
@@ -74,8 +75,7 @@ function emptyLoginInput(string $username, string $pwd) : bool {
     }
 }
 
-// Gör PDO version
-function loginUser(string $username, string $pwd) {
+function loginUser(string $username, string $pwd) {         // Gör PDO version
     $uidExists = userExists($pdo, $username, $username);
 
     if ($uidExists === false) {
@@ -94,3 +94,38 @@ function loginUser(string $username, string $pwd) {
         redirect('../index.php?userId=');
     }
 }
+
+// LOGOUT A USER
+
+// ----------------- ALL PROFILE PAGE FUNCTIONS -----------
+// EDIT AVATAR, BIO (NON UNIQUE VALUES)
+
+// EDIT EMAIL, PWD, USERNAME (MORE VALIDATION, UNIQUE VALUES)
+
+// --------------- ALL POSTS FUNCTIONS -------------
+// validate link?
+
+// createPost
+
+// edit post
+
+// delete post
+
+
+
+
+// ----------------- ALL COMMENTS FUNCTIONS --------------
+// createComment
+
+
+// editComment
+
+
+// deleteComment
+
+
+
+// ------------------ UPVOTES ------------
+// add upvote
+
+// delete upvote

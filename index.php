@@ -2,6 +2,8 @@
 // require __DIR__ . '/folderName/fileName.php';
 // require __DIR__ . '//.php';
 require __DIR__ . '/app/autoload.php';
+require __DIR__ . '/app/functions.php';
+require __DIR__ . '/app/posts/postsFunc.php';
 ?>
 
 <!DOCTYPE html>

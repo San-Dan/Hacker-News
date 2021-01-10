@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $username = $_POST['uid'];
     $email = $_POST['email'];
-    $pwd = $_POST['pwd'];
+    $pwd = $_POST['pwd']; 
     $pwdRep = $_POST['pwdRep'];
 
     createUser($pdo, $name, $username, $email, $pwd);
@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
         redirect('../login.php?error=userExists');
     }
 
-    }
+}
 
 else {
     redirect('../login.php');
