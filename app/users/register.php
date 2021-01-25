@@ -29,52 +29,19 @@ if (isset($_POST['submit'])) {
         redirect('../login.php');
     }
 }
-/*
+
 $statement = $pdo->prepare('SELECT * FROM users WHERE username = :username OR email = :email;');
 $statement->bindParam(':username', $username, PDO::PARAM_STR);
 $statement->bindParam(':email', $email, PDO::PARAM_STR);
 $statement->execute();
-// error säger fetch ist för execute om denna rad kommenteras ut
-// $statement->execute(['username' => $username, 'email' => $email]);
 
 $userExist = $statement->fetch(PDO::FETCH_ASSOC);
     if ($userExist === true) {
         $_SESSION['error'] = 'This user already exists, try again!';
         redirect('../login.php');
-    } */
+    }
 
 createUser($pdo, $name, $username, $email, $pwd);
 
 
-
-
-
-
-/* ERROR MESSAGES (låg först i html)
-if (isset($_SESSION["error"])) {
-    if ($_SESSION["error"] == "emptyinput") {
-        echo $_SESSION["error"];
-    } else if ($_SESSION["error"] == "invalidUid") {
-        echo      $_SESSION["error"];
-    } else if ($_SESSION["error"] == "invalidEmail") {
-        echo $_SESSION["error"];
-    } else if ($_SESSION["error"] == "noMatchPwd") {
-        echo $_SESSION["error"];
-    } else if ($_SESSION["error"] == "stmtfailure") {
-        echo $_SESSION["error"];
-    } else if ($_SESSION["error"] == "userExists") {
-        echo $_SESSION["error"];
-    } else if ($_SESSION["error"] == "none") {
-        echo 'Registration successful!';  // Vill skicka till Profile Page
-    }
-}
-
-$message = $_SESSION['message'] ?? '';
-unset($_SESSION['message']);
-
-$authenticated = $_SESSION['authenticated'] ?? false;
-*/
-/*if ( !== false) {
-        $_SESSION['error'] = 'This user already exists, try again!';
-        redirect('../login.php');
-    }*/
+redirect('../../profile.php');

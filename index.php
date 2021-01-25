@@ -11,11 +11,10 @@ require __DIR__ . '/views/header.php';
             return $posts; } ?>
 
 
-            <?php if (isset($_SESSION['latest']) === true) {
+            <?php if (isset($_SESSION['?=latest']) === true) {
                 $published ='published';
                 $posts = getLatestPosts($pdo, $published);
-                return $posts;}
-            foreach ($posts as $post) :?>
+                return $posts;} ?>
     <table>
         <tbody>
             <tr>
@@ -23,24 +22,15 @@ require __DIR__ . '/views/header.php';
                 <th>POSTS</th>
             </tr>
             <tr>
+            <?php foreach ($posts as $post) : ?>
                 <td><?php echo $post['id']; ?></td>
                 <td><?php echo $post['title']; ?></td>
                 <td><?php echo $post['description']; ?></td>
                 <td><?php echo $post['link']; ?></td>
+            <?php endforeach; ?>
             </tr>
-            <tr>
-                <td>Post id</td>
-                <td>Post title</td>
-                <td>Description</td>
-            </tr>
-            <tr>
-                <td> Post id</td>
-                <td>Post Title</td>
-                <td>Description</td>
-                </tr>
         </tbody>
     </table>
-    <?php endforeach; ?>
 </main>
 </div>
 

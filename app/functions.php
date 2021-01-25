@@ -106,8 +106,6 @@ function createUser(PDO $pdo, string $name, string $username, string $email, str
         $statement->bindParam(':email', $email, PDO::PARAM_STR);
         $statement->bindParam(':pwd', $hashedPwd, PDO::PARAM_STR);
         $statement->execute();
-
-        redirect('../profile.php');
 }
 
 // Läs noga här https://phpdelusions.net/pdo#query
