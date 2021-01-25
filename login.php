@@ -1,9 +1,5 @@
 <?php
-// require __DIR__ . '/folderName/fileName.php';
-// require __DIR__ . '//.php';
 require __DIR__ . '/app/autoload.php';
-require __DIR__ . '/app/functions.php';
-require __DIR__ . '/app/users/register.php';
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +11,7 @@ require __DIR__ . '/app/users/register.php';
     <title>.hackernews - Sign In</title>
 </head>
 <body>
-    <?php require __DIR__ . '/libs/templates/header.php'; ?>
+    <?php require __DIR__ . '/views/header.php'; ?>
     <main class="loginMain">
     <h1>Welcome, hackers!</h1>
     <section class="signinForm formContainer">
@@ -35,7 +31,7 @@ require __DIR__ . '/app/users/register.php';
                 echo $_SESSION["error"];
             }
         } ?>
-            </p>
+           </p>
         </div>
     </section>
 
@@ -54,41 +50,8 @@ require __DIR__ . '/app/users/register.php';
         <input type="password" name="pwdRep" placeholder="..." id="password" required>
         <button type="submit" name="submit">SIGN UP</button>
     </form>
-    <div class="errorMsgBox"> <!-- display:none until error is triggered -->
-        <p>
-            <?php // Borde kunna ha sep fil med error message och require här?
-            if (isset($_SESSION["error"])) {
-                if ($_SESSION["error"] == "emptyinput") {
-                    echo $_SESSION["error"];
-                }
-                else if ($_SESSION["error"] == "invalidUid") {
-                    echo $_SESSION["error"];
-                }
-
-                else if ($_SESSION["error"] == "invalidEmail") {
-                    echo $_SESSION["error"];
-                }
-
-                else if ($_SESSION["error"] == "noMatchPwd") {
-                    echo $_SESSION["error"];
-                }
-
-                else if ($_SESSION["error"] == "stmtfailure") {
-                    echo $_SESSION["error"];
-                }
-                else if ($_SESSION["error"] == "userExists") {
-                    echo $_SESSION["error"];
-            }
-            else if ($_SESSION["error"] == "none") {
-                echo 'Registration successful!';  // Vill skicka till Profile Page
-            }
-        }
-        ?>
-        </p>
-    </div>
     </section>
     </main>
 
-<?php require __DIR__ . '/libs/templates/footer.php'; ?>
-</body>
-</html>
+<?php require __DIR__ . '/views/footer.php'; ?>
+

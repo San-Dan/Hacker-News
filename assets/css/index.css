@@ -1,16 +1,23 @@
 main
 {
   z-index: 1;
-  width: 100%;
+  max-width: 1000px;
   height: 100%;
   margin-top: 120px;
+}
+
+.boxXL {
+  margin: 2rem;
+}
+.boxXL h1 {
+  font-size: large;
+  margin-bottom: 1rem;
 }
 
 table
 {
   max-height: fit-content;
   width: 400px;
-  margin: 2rem;
   border: slategray;
   border-style: solid;
 }
@@ -19,4 +26,13 @@ td, th {
   border: 1px dotted #dddddd;
   text-align: left;
   padding: 8px;
+}
+
+@media screen and (min-width: 1280px) {
+  .boxXL {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
 }

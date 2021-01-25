@@ -1,22 +1,21 @@
 <?php
-// require __DIR__ . '/folderName/fileName.php';
-// require __DIR__ . '//.php';
 require __DIR__ . '/app/autoload.php';
-require __DIR__ . '/app/functions.php';
-require __DIR__ . '/app/posts/postsFunc.php';
+require __DIR__ . '/views/header.php';
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>.hackernews</title>
-</head>
-<body>
-    <?php require __DIR__ . '/libs/templates/header.php'; ?>
+<div class="boxXL">
 <main>
+
+    <?php if (isset($_SESSION['?=votes']) === true) {
+            $upvotes = 'upvotes';
+            $posts = getTopPosts($pdo, $upvotes);
+            return $posts; } ?>
+
+
+            <?php if (isset($_SESSION['latest']) === true) {
+                $published ='published';
+                $posts = getLatestPosts($pdo, $published);
+                return $posts;}
+            foreach ($posts as $post) :?>
     <table>
         <tbody>
             <tr>
@@ -24,9 +23,10 @@ require __DIR__ . '/app/posts/postsFunc.php';
                 <th>POSTS</th>
             </tr>
             <tr>
-                <td>Post ID</td>
-                <td>Post title</td>
-                <td>Description</td>
+                <td><?php echo $post['id']; ?></td>
+                <td><?php echo $post['title']; ?></td>
+                <td><?php echo $post['description']; ?></td>
+                <td><?php echo $post['link']; ?></td>
             </tr>
             <tr>
                 <td>Post id</td>
@@ -39,9 +39,9 @@ require __DIR__ . '/app/posts/postsFunc.php';
                 <td>Description</td>
                 </tr>
         </tbody>
-
     </table>
+    <?php endforeach; ?>
 </main>
+</div>
 
-<?php require __DIR__ . '/libs/templates/footer.php'; ?>
-
+<?php require __DIR__ . '/views/footer.php'; ?>

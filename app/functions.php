@@ -1,56 +1,102 @@
 <?php
 declare(strict_types=1);
-require __DIR__ . '/autoload.php';
 
-function redirect(string $path) {
+ function redirect(string $path) {
     header("Location: ${path}");
     exit;
 }
 
-// ----------- USER / ACCOUNT FUNCTIONS --------------
-// VALIDATE FORM INPUT
-function emptySignupInput($name, $username, $email, $pwd, $pwdRep) : bool {
-    if (empty($name) || empty($username) || empty($email) || empty($pwd) || empty($pwdRep)) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-function validateEmail(string $email) : bool {
+function validateEmail(string $email): bool {
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    return true;
-    }
-    else {
+        return true;
+    } else {
         return false;
     }
 }
 
-function pwdMatch(string $pwd, string $pwdRep) : bool {
-    if ($pwd !== $pwdRep) {
-    return true;
-    }
-    else {
+function validatePwd(string $pwd, string $pwdRep): bool {
+    if ($pwd === $pwdRep) {
+        return true;
+    } else {
         return false;
     }
- }
+}
 
-// CHECKING IF USER EXISTS IN DB
- function userExists(PDO $pdo, string $username, string $email) {
-    $statement = $pdo->prepare('SELECT * FROM users WHERE username = :username OR email = :email;');
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-    return $user;
+// POSTS FUNCTIONS
+//----------------------------------
+function getTopPosts(PDO $pdo, string $upvotes) : array {
+    $stmt = $pdo->prepare("SELECT * FROM posts ORDERBY $upvotes DESC");
+
+    if (!$stmt) {
+        die(var_dump($pdo->errorInfo()));
+    }
+     $stmt->execute();
+
+     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+     return $posts;
+}
+
+function getLatestPosts(PDO $pdo, string $published) : array {
+    $stmt = $pdo->prepare("SELECT * FROM posts ORDERBY $published DESC");
+
+    if (!$stmt) {
+        die(var_dump($pdo->errorInfo()));
+    }
+     $stmt->execute();
+
+     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+     return $posts;
+}
+// FETCH USERS POSTS IN DB 1
+function getUsersPost(PDO $pdo, int $id) : array {
+    $stmt = $pdo->prepare("SELECT * FROM posts WHERE id = :id");
+
+    if (!$stmt) {
+        die(var_dump($pdo->errorInfo()));
+    }
+     $stmt->execute();
+
+     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+     return $posts;
+}
+
+// FETCH USERS POSTS IN DB 2
+function getUsersPosts(PDO $pdo, int $id, int $posts_id) {
+    $statement = $pdo->prepare('SELECT * FROM posts INNER JOIN users WHERE users_id = :id ;');
+    $statement->execute();
+    $posts = $statement->fetch(PDO::FETCH_ASSOC);
+    return $posts;
     }
 
-// Create USER - Add: SANITIZE USERNAME OCH EMAIL
- function createUser(PDO $pdo, string $name, string $username, string $email, string $pwd) {
-    $insert = 'INSERT INTO users(name, username, email, password) VALUES(:name, :username, :email)';
-    $statement = $pdo->prepare($insert);
-    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-    if (!userExists($pdo, $username, $email)) {
+function createPost(PDO $pdo, string $title, string $desription, string $link) {
+    $stm = $pdo->query("INSERT INTO posts....");
+
+    $rows = $stm->fetchAll(PDO::FETCH_NUM);
+
+    foreach($rows as $row) {    // <-- kanske nåt sånt? I vilken fil..?
+        echo("$row[0] $row[1] $row[2]\n");
+    }
+}
+
+// USER FUNCTIONS
+//----------------------------------
+/*function bla() {
+    die(var_dump($pdo->errorInfo()));
+
+    $statement->execute();
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+    return $user;
+} */
+
+function getUserProfile() {
+
+}
+
+function createUser(PDO $pdo, string $name, string $username, string $email, string $pwd) {
+    $statement = $pdo->prepare('INSERT INTO users (name, username, email, pwd) VALUES (:name, :username, :email, :pwd);');
+    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
         if (!$statement) {
             die(var_dump($pdo->errorInfo()));
@@ -58,74 +104,11 @@ function pwdMatch(string $pwd, string $pwdRep) : bool {
         $statement->bindParam(':name', $name, PDO::PARAM_STR);
         $statement->bindParam(':username', $username, PDO::PARAM_STR);
         $statement->bindParam(':email', $email, PDO::PARAM_STR);
-        $statement->bindParam(':password', $hashedPwd, PDO::PARAM_STR);
+        $statement->bindParam(':pwd', $hashedPwd, PDO::PARAM_STR);
         $statement->execute();
 
         redirect('../profile.php');
-    }
 }
 
-// LOGIN A USER
-function emptyLoginInput(string $username, string $pwd) : bool {
-    if (empty($username) || empty($pwd)) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-function loginUser(string $username, string $pwd) {         // Gör PDO version
-    $uidExists = userExists($pdo, $username, $username);
-
-    if ($uidExists === false) {
-        redirect('../../login.php?error=wronglogin');
-    }
-    $pwdHashed = $uidExists["password"]; // Vad händer här..?
-    $checkPwd = password_verify($pwd, $pwdHashed);
-
-    if ($checkPwd == false) {
-        redirect('../../login.php?error=wronglogin');
-    }
-    else if ($checkPwd == true) {
-        session_start();
-        $_SESSION["userid"] = $uidExists["id"];
-        $_SESSION["useruid"] = $uidExists["username"];
-        redirect('../index.php?userId=');
-    }
-}
-
-// LOGOUT A USER
-
-// ----------------- ALL PROFILE PAGE FUNCTIONS -----------
-// EDIT AVATAR, BIO (NON UNIQUE VALUES)
-
-// EDIT EMAIL, PWD, USERNAME (MORE VALIDATION, UNIQUE VALUES)
-
-// --------------- ALL POSTS FUNCTIONS -------------
-// validate link?
-
-// createPost
-
-// edit post
-
-// delete post
-
-
-
-
-// ----------------- ALL COMMENTS FUNCTIONS --------------
-// createComment
-
-
-// editComment
-
-
-// deleteComment
-
-
-
-// ------------------ UPVOTES ------------
-// add upvote
-
-// delete upvote
+// Läs noga här https://phpdelusions.net/pdo#query
+// och här (om execute+bindParam): https://doc.bccnsoft.com/docs/php-docs-7-en/pdostatement.execute.html

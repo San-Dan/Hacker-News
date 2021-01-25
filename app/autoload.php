@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 // Start the session engines.
-//session_start(); 
+session_start();
 
 // Set the default timezone to Coordinated Universal Time.
 date_default_timezone_set('UTC');
@@ -12,8 +12,11 @@ date_default_timezone_set('UTC');
 mb_internal_encoding('UTF-8');
 
 // Fetch the global configuration array.
-$config = require __DIR__ . '/../libs/config.php';
+$config = require __DIR__ . '/config.php';
 
+
+// Fetch global functions
+require __DIR__ . '/functions.php';
 
 // PDO connection
 $pdo = new PDO('sqlite:hackernews.sqlite');
