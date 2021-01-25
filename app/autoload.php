@@ -19,4 +19,4 @@ $config = require __DIR__ . '/config.php';
 require __DIR__ . '/functions.php';
 
 // PDO connection
-$pdo = new PDO('sqlite:hackernews.sqlite');
+$pdo = new PDO('sqlite:../../hackernews.sqlite');
