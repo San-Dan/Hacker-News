@@ -22,7 +22,7 @@ require __DIR__ . '/views/header.php';
                 <th>POSTS</th>
             </tr>
             <tr>
-            <?php foreach ($posts as $post) : ?>
+            <?php foreach ($posts as $post): ?>
                 <td><?php echo $post['id']; ?></td>
                 <td><?php echo $post['title']; ?></td>
                 <td><?php echo $post['description']; ?></td>

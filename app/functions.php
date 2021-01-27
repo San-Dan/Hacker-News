@@ -23,6 +23,8 @@ function validatePwd(string $pwd, string $pwdRep): bool {
 }
 
 
+
+
 // POSTS FUNCTIONS
 //----------------------------------
 function getTopPosts(PDO $pdo, string $upvotes) : array {
@@ -92,6 +94,16 @@ function createPost(PDO $pdo, string $title, string $desription, string $link) {
 
 function getUserProfile() {
 
+}
+
+function userExists(PDO $pdo, string $username, string $email){
+    $statement = $pdo->prepare('SELECT * FROM users WHERE username = :username OR email = :email;');
+    $statement->bindParam(':username', $username, PDO::PARAM_STR);
+    $statement->bindParam(':email', $email, PDO::PARAM_STR);
+    $statement->execute();
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $user;
 }
 
 function createUser(PDO $pdo, string $name, string $username, string $email, string $pwd) {

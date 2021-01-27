@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
-// Create USER - Add: SANITIZE USERNAME OCH EMAIL
+// Create USER
 
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
-    $username = $_POST['uid'];
-    $email = $_POST['email'];
+    $username = trim(filter_var($_POST['uid'], FILTER_SANITIZE_STRING));
+    $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
     $pwd = $_POST['pwd'];
     $pwdRep = $_POST['pwdRep'];
 
@@ -28,20 +28,18 @@ if (isset($_POST['submit'])) {
         $_SESSION['error'] = 'Passwords did not match, try again!';
         redirect('../login.php');
     }
+
 }
 
-$statement = $pdo->prepare('SELECT * FROM users WHERE username = :username OR email = :email;');
-$statement->bindParam(':username', $username, PDO::PARAM_STR);
-$statement->bindParam(':email', $email, PDO::PARAM_STR);
-$statement->execute();
 
-$userExist = $statement->fetch(PDO::FETCH_ASSOC);
-    if ($userExist === true) {
-        $_SESSION['error'] = 'This user already exists, try again!';
-        redirect('../login.php');
-    }
-
-createUser($pdo, $name, $username, $email, $pwd);
+if (userExists($pdo, $username, $email)) {
+      $_SESSION['error'] = 'This user already exists, try again!';
+      redirect('../../login.php');
+   }
+   else {
+      createUser($pdo, $name, $username, $email, $pwd);
+      redirect('../../profile.php');
+}
 
 
-redirect('../../profile.php');
+
