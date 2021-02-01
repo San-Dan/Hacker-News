@@ -24,6 +24,7 @@ require __DIR__ . '/views/header.php';
             <tr>
             <?php foreach ($posts as $post): ?>
                 <td><?php echo $post['id']; ?></td>
+                <td><?php echo $post['users_username']; ?></td>  // ADD COLUMN IN POSTS?
                 <td><?php echo $post['title']; ?></td>
                 <td><?php echo $post['description']; ?></td>
                 <td><?php echo $post['link']; ?></td>

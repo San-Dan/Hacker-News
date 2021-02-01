@@ -82,6 +82,18 @@ function createPost(PDO $pdo, string $title, string $desription, string $link) {
     }
 }
 
+// COMMENT FUNCTIONS
+//------------------------------------------
+
+function createComment(PDO $pdo, string $comment, int $posts_id, int $users_id, string $date) {
+    $statement = $pdo->prepare('INSERT INTO comments (posts_id, users_id, comment, date) VALUES (:post_id, :user_id, :author, :text, :date)');
+    $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+    $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $statement->bindParam(':author', $author, PDO::PARAM_STR);
+    $statement->bindParam(':text', $text, PDO::PARAM_STR);
+    $statement->bindParam(':date', $date, PDO::PARAM_STR);
+    $statement->execute();
+}
 // USER FUNCTIONS
 //----------------------------------
 /*function bla() {

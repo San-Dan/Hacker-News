@@ -1,0 +1,29 @@
+.profileMain {
+  display: flex;
+	flex-direction: column;
+  margin-top: 110px;
+  margin-bottom: 100px;
+  margin-left: 30px;
+  max-width: 400px;
+
+  }
+
+.profile-container
+ {
+   display: flex;
+   flex-direction: column;
+   padding: 10px;
+   margin-bottom: 2rem;
+  justify-content: space-evenly;
+ }
+
+ h3 {
+  margin-top: 20px;
+  margin-bottom: 20px;;
+}
+
+img
+ {
+   width: 180px;
+   height: 180px;
+ }

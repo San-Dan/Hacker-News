@@ -38,6 +38,8 @@ if (userExists($pdo, $username, $email)) {
    }
    else {
       createUser($pdo, $name, $username, $email, $pwd);
+      unset($user['pwd']);
+      $_SESSION['user'] = $user;
       redirect('../../profile.php');
 }
 
