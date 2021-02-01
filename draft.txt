@@ -48,3 +48,10 @@ $authenticated = $_SESSION['authenticated'] ?? false;
         <?php endif; ?>
     </ul>
 </nav>
+
+
+INSERT INTO posts (users_id, title, description, published)
+VALUES (9, 'Wordpress rules!', 'crazy shit', '2021-01-28 14:55:23');
+
+INSERT INTO posts (users_id, author, title, description, published)
+VALUES (4, 'nover3', 'Google did what??', 'crazy shit', '2021-01-05 11:55:23');

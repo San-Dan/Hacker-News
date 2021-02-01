@@ -26,44 +26,26 @@ function validatePwd(string $pwd, string $pwdRep): bool {
 
 
 // POSTS FUNCTIONS
+
+// Extended error info: if (!$statement) { die(var_dump($pdo->errorInfo())); }
 //----------------------------------
-function getTopPosts(PDO $pdo, string $upvotes) : array {
-    $stmt = $pdo->prepare("SELECT * FROM posts ORDERBY $upvotes DESC");
+function getTopPosts(PDO $pdo) {
+    $statement = $pdo->prepare('SELECT * FROM posts ORDER BY upvotes DESC');
+    $statement->execute();
 
-    if (!$stmt) {
-        die(var_dump($pdo->errorInfo()));
-    }
-     $stmt->execute();
+    $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $posts;
 
-     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-     return $posts;
 }
 
-function getLatestPosts(PDO $pdo, string $published) : array {
-    $stmt = $pdo->prepare("SELECT * FROM posts ORDERBY $published DESC");
+function getLatestPosts(PDO $pdo) {
+    $statement = $pdo->prepare('SELECT * FROM posts ORDER BY published DESC');
+    $statement->execute();
 
-    if (!$stmt) {
-        die(var_dump($pdo->errorInfo()));
-    }
-     $stmt->execute();
-
-     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-     return $posts;
-}
-// FETCH USERS POSTS IN DB 1
-function getUsersPost(PDO $pdo, int $id) : array {
-    $stmt = $pdo->prepare("SELECT * FROM posts WHERE id = :id");
-
-    if (!$stmt) {
-        die(var_dump($pdo->errorInfo()));
-    }
-     $stmt->execute();
-
-     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-     return $posts;
+    $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $posts;
 }
 
-// FETCH USERS POSTS IN DB 2
 function getUsersPosts(PDO $pdo, int $id, int $posts_id) {
     $statement = $pdo->prepare('SELECT * FROM posts INNER JOIN users WHERE users_id = :id ;');
     $statement->execute();
@@ -72,10 +54,16 @@ function getUsersPosts(PDO $pdo, int $id, int $posts_id) {
     }
 
 
-function createPost(PDO $pdo, string $title, string $desription, string $link) {
-    $stm = $pdo->query("INSERT INTO posts....");
+function createPost(PDO $pdo, string $title, int $users_id, string $description, string $link, string $date) {
+    $statement = $pdo->prepare('INSERT INTO posts (id, users_id, title, description, link, date) VALUES (:posts_id, :users_id, :author, :text, :date)');
+    $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+    $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $statement->bindParam(':author', $author, PDO::PARAM_STR);
+    $statement->bindParam(':text', $text, PDO::PARAM_STR);
+    $statement->bindParam(':date', $date, PDO::PARAM_STR);
+    $statement->execute();
 
-    $rows = $stm->fetchAll(PDO::FETCH_NUM);
+    $rows = $statement->fetchAll(PDO::FETCH_NUM);
 
     foreach($rows as $row) {    // <-- kanske nåt sånt? I vilken fil..?
         echo("$row[0] $row[1] $row[2]\n");
@@ -86,7 +74,7 @@ function createPost(PDO $pdo, string $title, string $desription, string $link) {
 //------------------------------------------
 
 function createComment(PDO $pdo, string $comment, int $posts_id, int $users_id, string $date) {
-    $statement = $pdo->prepare('INSERT INTO comments (posts_id, users_id, comment, date) VALUES (:post_id, :user_id, :author, :text, :date)');
+    $statement = $pdo->prepare('INSERT INTO comments (posts_id, users_id, comment, date) VALUES (:posts_id, :users_id, :author, :text, :date)');
     $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
     $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $statement->bindParam(':author', $author, PDO::PARAM_STR);
@@ -104,8 +92,13 @@ function createComment(PDO $pdo, string $comment, int $posts_id, int $users_id, 
     return $user;
 } */
 
-function getUserProfile() {
+function getProfile(PDO $pdo, int $id) {
+    $statement = $pdo->prepare('SELECT * FROM profile WHERE users_id = :id');
+    $statement->bindParam(':users_id', $id, PDO::PARAM_STR);
+    $statement->execute();
+    $profile = $statement->fetch(PDO::FETCH_ASSOC);
 
+    return $profile;
 }
 
 function userExists(PDO $pdo, string $username, string $email){

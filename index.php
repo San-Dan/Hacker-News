@@ -4,17 +4,6 @@ require __DIR__ . '/views/header.php';
 ?>
 <div class="boxXL">
 <main>
-
-    <?php if (isset($_SESSION['?=votes']) === true) {
-            $upvotes = 'upvotes';
-            $posts = getTopPosts($pdo, $upvotes);
-            return $posts; } ?>
-
-
-            <?php if (isset($_SESSION['?=latest']) === true) {
-                $published ='published';
-                $posts = getLatestPosts($pdo, $published);
-                return $posts;} ?>
     <table>
         <tbody>
             <tr>
@@ -22,12 +11,19 @@ require __DIR__ . '/views/header.php';
                 <th>POSTS</th>
             </tr>
             <tr>
-            <?php foreach ($posts as $post): ?>
+            <?php if (isset($_GET['votes']) === true) {
+            $posts = getTopPosts($pdo);
+             }
+            else {                             //if (isset($_GET['latest' OR ''])) return $posts;
+                $posts = getLatestPosts($pdo);
+                } ?>
+            <?php foreach ($posts as $post) : ?>
                 <td><?php echo $post['id']; ?></td>
-                <td><?php echo $post['users_username']; ?></td>  // ADD COLUMN IN POSTS?
+                <td><?php echo $post['author']; ?></td>
                 <td><?php echo $post['title']; ?></td>
                 <td><?php echo $post['description']; ?></td>
                 <td><?php echo $post['link']; ?></td>
+                <td><?php echo $post['upvotes']; ?></td>
             <?php endforeach; ?>
             </tr>
         </tbody>
