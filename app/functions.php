@@ -30,14 +30,14 @@ function validatePwd(string $pwd, string $pwdRep): bool {
 // Extended error info: if (!$statement) { die(var_dump($pdo->errorInfo())); }
 //----------------------------------
 function getTopPosts(PDO $pdo) {
-    $statement = $pdo->prepare('SELECT * FROM posts ORDER BY upvotes DESC');
+    $statement = $pdo->prepare('SELECT * FROM posts ORDER BY upvotes DESC'); // ORDER BY upvotes DESC
     $statement->execute();
     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $posts;
 }
 
 function getLatestPosts(PDO $pdo){
-    $statement = $pdo->prepare('SELECT * FROM posts ORDER BY published DESC');
+    $statement = $pdo->prepare('SELECT * FROM posts ORDER BY published DESC'); // ORDER BY published DESC
     $statement->execute();
     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $posts;

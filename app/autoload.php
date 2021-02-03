@@ -11,12 +11,8 @@ date_default_timezone_set('UTC');
 // Set the default character encoding to UTF-8.
 mb_internal_encoding('UTF-8');
 
-// Fetch the global configuration array.
-$config = require __DIR__ . '/config.php';
-
-
 // Fetch global functions
 require __DIR__ . '/functions.php';
 
 // PDO connection
-$pdo = new PDO('sqlite:../../hackernews.sqlite');
+$pdo = new PDO('sqlite:' . __DIR__ . '../../hackernews.sqlite');
