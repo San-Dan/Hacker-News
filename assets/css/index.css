@@ -1,14 +1,12 @@
-main
-{
-  z-index: 1;
-  max-width: 1000px;
-  height: 100%;
-  margin-top: 120px;
-}
 
 .boxXL {
   margin: 2rem;
+  height: 72vh;
+  z-index: 1;
+  max-width: 1000px;
+  margin-top: 120px;
 }
+
 .boxXL h1 {
   font-size: large;
   margin-bottom: 1rem;

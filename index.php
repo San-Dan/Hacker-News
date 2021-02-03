@@ -2,8 +2,7 @@
 require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/views/header.php';
 ?>
-<div class="boxXL">
-<main>
+<main class="boxXL">
     <table class="postsTable">
 <!-- SORT POSTS BY DATE OR VOTES -->
     <?php if (isset($_GET['votes'])) {
@@ -32,10 +31,8 @@ require __DIR__ . '/views/header.php';
             </tr>
             </tbody>
             <tbody>
-                <tr>
-                    <td colspan="6">Comments</td>
-                </tr>
-                
+                <tr><th colspan="6">Comments</th></tr>
+                <tr></tr>
 
                 <tr class="spaceRow">  </tr>
             </tbody>
@@ -44,6 +41,5 @@ require __DIR__ . '/views/header.php';
 
     </table>
 </main>
-</div>
 
 <?php require __DIR__ . '/views/footer.php'; ?>
