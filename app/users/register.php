@@ -39,7 +39,13 @@ if (userExists($pdo, $username, $email)) {
    else {
       createUser($pdo, $name, $username, $email, $pwd);
       unset($user['pwd']);
-      $_SESSION['user'] = $user['username'];
+      $_SESSION['user'] = [
+        'username' => $user['username'],
+        'avatar' => $user['avatar'],
+        'email' => $user['email'],
+        'bio' => $user['bio'],
+        'id' => $user['id']
+    ];
       redirect('../../profile.php');
 }
 

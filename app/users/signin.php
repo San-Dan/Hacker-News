@@ -15,7 +15,14 @@ if (isset($_POST['submit'])) {
 
     if ($user['username'] && password_verify($pwd, $user['pwd'])) {
         unset($user['pwd']);
-        $_SESSION['user'] = $user['username'];
+        $_SESSION['user'] = [
+            'username' => $user['username'],
+            'avatar' => $user['avatar'],
+            'email' => $user['email'],
+            'bio' => $user['bio'],
+            'id' => $user['id']
+        ];
+
         redirect('../../profile.php');
     }
     if (!isset($user['username'])) {

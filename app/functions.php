@@ -32,16 +32,13 @@ function validatePwd(string $pwd, string $pwdRep): bool {
 function getTopPosts(PDO $pdo) {
     $statement = $pdo->prepare('SELECT * FROM posts ORDER BY upvotes DESC');
     $statement->execute();
-
     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $posts;
-
 }
 
-function getLatestPosts(PDO $pdo) {
+function getLatestPosts(PDO $pdo){
     $statement = $pdo->prepare('SELECT * FROM posts ORDER BY published DESC');
     $statement->execute();
-
     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $posts;
 }

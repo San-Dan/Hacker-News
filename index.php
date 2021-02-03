@@ -12,7 +12,7 @@ require __DIR__ . '/views/header.php';
             </tr>
             <tr>
             <?php if (isset($_GET['votes']) === true) {
-            $posts = getTopPosts($pdo);
+                    $posts = getTopPosts($pdo);
              }
             else {                             //if (isset($_GET['latest' OR ''])) return $posts;
                 $posts = getLatestPosts($pdo);
