@@ -12,10 +12,14 @@ top: 0;
 width: 100%;
 z-index: 2;
 }
-
-header h1 {
+#titleLink {
+  text-decoration: none;
   color: var(--title-heading);
 }
+#titleLink:hover {
+  text-decoration: underline;
+}
+
 nav {
   display: flex;
   justify-content: flex-end;
@@ -27,6 +31,10 @@ header nav a {
   font-size: 1rem;
   text-decoration: none;
   margin-left: 1rem;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 a:hover {
