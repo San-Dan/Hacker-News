@@ -12,16 +12,13 @@ if (isset($_POST['submit'])) {
     $statement->execute();
 
     $user = $statement->fetch(PDO::FETCH_ASSOC);
-    return $user;
 
-    die(var_dump($user));
-
-    if ($user['username'] && password_verify($pwd, $user['pwd'] === true)) {
+    if ($user['username'] && password_verify($pwd, $user['pwd'])) {
         unset($user['pwd']);
-        $_SESSION['user'];
+        $_SESSION['user'] = $user['username'];
         redirect('../../profile.php');
     }
-    if ($user['username'] === false) {
+    if (!isset($user['username'])) {
         $_SESSION['error'] = 'No matching account found, try again!';
         redirect('../../login.php');
     }
@@ -50,4 +47,11 @@ if (!userExists($pdo, $username, $email)) {
         $_SESSION['error'] = 'No matching account found, try again!';
         redirect('../../login.php');
     }
+
+$found = userExists($username, $email);
+$found = $user
+if(iseet($found))
+
+$statement->bindParam(':username', $input, PDO::PARAM_STR);
+    $statement->bindParam(':email', $input, PDO::PARAM_STR);
 */

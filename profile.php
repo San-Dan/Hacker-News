@@ -12,7 +12,7 @@ if (!isset($_SESSION['user'])) {
         <h2>PROFILE PAGE</h2>
         <img src="assets/profile.jpg" alt="avatar">
         <h3>Username: <?php echo $_SESSION['user'];?> </h3>
-        <h3>Email: <?php ?></h3>
+        <h3>Email: <?php echo $_SESSION['user']['email'] ;?></h3>
         <h3>Bio <?php ?></h3>
         <textarea name="" id="" cols="30" rows="10"></textarea>
         <button type="submit">Edit Info</button>

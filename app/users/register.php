@@ -39,7 +39,7 @@ if (userExists($pdo, $username, $email)) {
    else {
       createUser($pdo, $name, $username, $email, $pwd);
       unset($user['pwd']);
-      $_SESSION['user'];
+      $_SESSION['user'] = $user['username'];
       redirect('../../profile.php');
 }
 
