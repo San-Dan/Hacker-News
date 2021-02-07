@@ -5,7 +5,7 @@ require __DIR__ . '/views/header.php';
 <main class="boxXL">
     <table class="tablePosts">
         <!-- SORT POSTS BY DATE OR VOTES -->
-        <?php if (isset($_GET['votes'])) {
+        <?php if (isset($_GET['?=votes'])) {
             $posts = getTopPosts($pdo); // FUNKAR INTE??
         } else {
             $posts = getLatestPosts($pdo);
@@ -30,10 +30,13 @@ require __DIR__ . '/views/header.php';
                         <td><button type="submit" name="show">See Comments</button></td>
                     </form>
                     <?php if (isset($_SESSION['user'])) : ?>
-                        <form action="/index.php" method="POST">
+                        <form action="/app/posts/upvotes.php" method="POST">
                             <td><button type="submit" name="upvote">Me like!</button></td>
+                        </form>
+                        <form action="/addComment.php?post_id=<?= $post['id'] ?>" method="POST">
                             <td><button type="submit" name="comment">Add Comment</button></td>
                         </form>
+
                     <?php endif; ?>
                 </tr>
         </tbody>

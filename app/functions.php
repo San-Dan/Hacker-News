@@ -43,6 +43,14 @@ function getLatestPosts(PDO $pdo){
     return $posts;
 }
 
+function getOnePost(PDO $pdo, int $post_id){
+    $statement = $pdo->prepare('SELECT * FROM posts WHERE id = :post_id');
+    $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+    $statement->execute();
+    $post = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $post;
+}
+
 function getUsersPosts(PDO $pdo, int $id, int $posts_id) {
     $statement = $pdo->prepare('SELECT * FROM posts INNER JOIN users WHERE users_id = :id ;');
     $statement->execute();
@@ -70,7 +78,7 @@ function createPost(PDO $pdo, string $title, int $users_id, string $description,
 // COMMENT FUNCTIONS
 //------------------------------------------
 
-function createComment(PDO $pdo, string $comment, int $posts_id, int $users_id, string $date) {
+/*function createComment(PDO $pdo, string $comment, int $posts_id, int $users_id, string $date) {
     $statement = $pdo->prepare('INSERT INTO comments (posts_id, users_id, comment, date) VALUES (:posts_id, :users_id, :author, :text, :date)');
     $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
     $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
@@ -78,7 +86,7 @@ function createComment(PDO $pdo, string $comment, int $posts_id, int $users_id, 
     $statement->bindParam(':text', $text, PDO::PARAM_STR);
     $statement->bindParam(':date', $date, PDO::PARAM_STR);
     $statement->execute();
-}
+}*/
 
 function getComments(PDO $pdo, int $posts_id) {
     $statement = $pdo->prepare('SELECT * FROM comments WHERE posts_id = :posts_id;');

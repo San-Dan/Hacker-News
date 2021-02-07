@@ -14,7 +14,7 @@ if (isset($_SESSION['user'])) {
         $author = $_SESSION['user']['username'];
 
 
-// set as function createPost() {} instead?
+// set as function createPost() instead?
         $statement = $pdo->prepare('INSERT INTO posts (users_id, author, title, description, link, published) VALUES (:users_id, :author, :title, :description, :link, :published)');
         $statement->bindParam(':title', $title, PDO::PARAM_STR);
         $statement->bindParam(':users_id', $id, PDO::PARAM_INT);
