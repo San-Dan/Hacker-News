@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
@@ -33,7 +34,6 @@ if (isset($_POST['submit'])) {
         $_SESSION['error'] = 'Wrong password, try again!';
         redirect('../../login.php');
     }
-
 }
 
 

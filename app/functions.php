@@ -79,6 +79,13 @@ function createComment(PDO $pdo, string $comment, int $posts_id, int $users_id, 
     $statement->bindParam(':date', $date, PDO::PARAM_STR);
     $statement->execute();
 }
+
+function getComments(PDO $pdo, int $posts_id) {
+    $statement = $pdo->prepare('SELECT * FROM comments WHERE posts_id = :posts_id;');
+    $statement->execute();
+    $comments = $statement->fetch(PDO::FETCH_ASSOC);
+    return $comments;
+}
 // USER FUNCTIONS
 //----------------------------------
 /*function bla() {

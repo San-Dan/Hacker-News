@@ -1,4 +1,3 @@
-
 .boxXL {
   margin: 2rem;
   height: 72vh;
@@ -12,15 +11,15 @@
   margin-bottom: 1rem;
 }
 
-table
-{
+table {
   max-height: fit-content;
   width: 400px;
   border: slategray;
   border-style: solid;
 }
 
-td, th {
+td,
+th {
   border: 1px dotted #dddddd;
   text-align: left;
   padding: 8px;
@@ -31,6 +30,5 @@ td, th {
     max-width: 1280px;
     margin-left: auto;
     margin-right: auto;
-
   }
 }
