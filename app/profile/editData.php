@@ -9,8 +9,8 @@ if (!isset($_SESSION['user'])) {
 }
 
 $id = $_SESSION['user']['id'];
-$email = $_SESSION['user']['email'];
 $bio = $_SESSION['user']['bio'];
+$email = $_SESSION['user']['email'];
 
 // EDIT BIO AND EMAIL
 
@@ -24,7 +24,7 @@ if (isset($_POST['newBio'], $_POST['submit'])) {
 }
 
 if (isset($_POST['newEmail'], $_POST['submit'])) {
-    $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
+    $newEmail = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
 
     $statement = $pdo->prepare('UPDATE users SET email = :newEmail WHERE id = :id);');
     $statement->bindParam(':newEmail', $newEmail, PDO::PARAM_STR);
@@ -34,7 +34,7 @@ if (isset($_POST['newEmail'], $_POST['submit'])) {
 }
 
 
-// EDIT AVATAR (NON UNIQUE VALUES), kolla Files lektion
+// EDIT AVATAR (NON UNIQUE VALUES), kolla Files lektion, spara img-src som string i db
 
 
 // CHANGE PASSWORD
