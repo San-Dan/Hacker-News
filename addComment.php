@@ -9,7 +9,7 @@ require __DIR__ . '/views/header.php';
 
 $post_id = $_GET['post_id'];
 
-getOnePost($pdo, $post_id);
+$post = getOnePost($pdo, $post_id);
 
 ?>
 <div class="boxXL">
@@ -20,6 +20,7 @@ getOnePost($pdo, $post_id);
             <input type="text" value="<?php echo $post['title']?>" readonly>
             <textarea type="text" name="comment" required></textarea>
             <button type="submit" name="submit">ADD COMMENT</button>
+            <input type="hidden" name="post_id" value="<?= $post_id; ?>">
             <?php //die(var_dump($_GET['post_id'])); ?>
         </form>
         </div>

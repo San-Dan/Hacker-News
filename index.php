@@ -5,7 +5,7 @@ require __DIR__ . '/views/header.php';
 <main class="boxXL">
     <table class="tablePosts">
         <!-- SORT POSTS BY DATE OR VOTES -->
-        <?php if (isset($_GET['?=votes'])) {
+        <?php if (isset($_GET['order'])) {
             $posts = getTopPosts($pdo); // FUNKAR INTE??
         } else {
             $posts = getLatestPosts($pdo);

@@ -48,7 +48,7 @@ function getOnePost(PDO $pdo, int $post_id){
     $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
     $statement->execute();
     $post = $statement->fetchAll(PDO::FETCH_ASSOC);
-    return $post;
+    return $post[0];
 }
 
 function getUsersPosts(PDO $pdo, int $id, int $posts_id) {

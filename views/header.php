@@ -18,8 +18,8 @@
     <header>
         <h1><a href="index.php" id="titleLink">.hackernews</a></h1>
         <nav>
-            <a href="index.php?=latest">Latest</a>
-            <a href="index.php?=votes">Most upvoted</a>
+            <a href="index.php?order=latest">Latest</a>
+            <a href="index.php?order=votes">Most upvoted</a>
 
             <?php if (isset($_SESSION['user'])) : ?>
                 <a href="createPost.php" class="bold">Create Post</a>

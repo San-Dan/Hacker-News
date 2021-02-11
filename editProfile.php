@@ -8,17 +8,18 @@ if (!isset($_SESSION['user'])) {
 ?>
 
 <main class="profileMain">
-    <section class="profile-container">
-        <h2>PROFILE PAGE</h2>
+    <form class="editForm" action="/app/profile/editData.php" method="POST">
+        <h2>PROFILE</h2>
         <img src="assets/profile.jpg" alt="avatar">
-        <h3>Username: <?php echo $_SESSION['user']['username'];?> </h3>
-        <h3>Email: <?php echo $_SESSION['user']['email'];?></h3>
-        <h3>Bio </h3>
+        <button>Add Image</button>
+        <label>Username: <?php echo $_SESSION['user']['username'];?> </label>
+        <label>Email: <?php echo $_SESSION['user']['email'];?></label>
+        <input type="email" name="newEmail" placeholder="Your new email">
+        <label>Bio: </label>
         <div class="bioBox"><?php echo $_SESSION['user']['bio'];?> </div>
-        <form action="/editProfile.php">
-        <button type="submit" name ="edit">Edit Info</button>
-        </form>
-    </section>
+        <textarea type="text" name="newBio" placeholder="Your new bio"></textarea>
+        <button type="submit">Save Info</button>
+    </form>
 
     <section class="pwdSection">
         <h2>PASSWORD</h2>

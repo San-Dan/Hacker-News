@@ -35,7 +35,6 @@ form {
   resize: none;
   height: 150px;
   outline: none;
-
 }
 
 button {
@@ -45,7 +44,53 @@ button {
   margin-top: 1rem;
 }
 
-label {
+.formContainer label {
   font-size: medium;
   margin-left: 10px;
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+}
+
+.editForm textarea {
+  width: 80%;
+  padding: 15px;
+  border: none;
+  border-radius: 2rem;
+  background-color: #f1f1f1;
+  resize: none;
+  height: 100px;
+  outline: none;
+  margin-top: 15px;
+}
+.editForm label {
+  font-size: medium;
+  font-weight:bold;
+  margin-top: 15px;
+}
+
+.editForm input {
+  width: 80%;
+  padding: 10px;
+  border: none;
+  border-radius: 2rem;
+  background-color: #f1f1f1;
+  resize: none;
+  max-height: 50px;
+  outline: none;
+}
+
+.bioBox {
+  border-style: none;
+  border-radius: 1rem;
+  border-width: 2px;
+  background-color: var(--btn);
+  padding: 10px;
+  font-size: small;
+  opacity: 0.8;
 }
