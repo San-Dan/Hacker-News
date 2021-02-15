@@ -28,26 +28,21 @@ if (isset($_POST['submit'])) {
         $_SESSION['error'] = 'Passwords did not match, try again!';
         redirect('../login.php');
     }
-
 }
 
 
 if (userExists($pdo, $username, $email)) {
-      $_SESSION['error'] = 'This user already exists, try again!';
-      redirect('../../login.php');
-   }
-   else {
-      createUser($pdo, $name, $username, $email, $pwd);
-      unset($user['pwd']);
-      $_SESSION['user'] = [
+    $_SESSION['error'] = 'This user already exists, try again!';
+    redirect('../../login.php');
+} else {
+    createUser($pdo, $name, $username, $email, $pwd);
+    unset($user['pwd']);
+    $_SESSION['user'] = [
         'username' => $user['username'],
         'avatar' => $user['avatar'],
         'email' => $user['email'],
         'bio' => $user['bio'],
         'id' => $user['id']
     ];
-      redirect('../../profile.php');
+    redirect('../../profile.php');
 }
-
-
-

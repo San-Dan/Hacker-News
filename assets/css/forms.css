@@ -39,7 +39,7 @@ form {
 
 button {
   border-radius: 5px;
-  max-width: 80px;
+  max-width: 100px;
   background-color: var(--btn);
   margin-top: 1rem;
 }

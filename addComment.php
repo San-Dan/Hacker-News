@@ -7,24 +7,25 @@ require __DIR__ . '/views/header.php';
 
 // ex url: http://localhost:8000/addComment.php?post_id=2
 
-$post_id = $_GET['post_id'];
+$post_id = (int)$_GET['post_id'];
 
 $post = getOnePost($pdo, $post_id);
 
 ?>
 <div class="boxXL">
-<main>
-    <section class="formContainer">
-        <h2>Write a comment</h2>
-        <form action="app/comments/submitComment.php" method="post">
-            <input type="text" value="<?php echo $post['title']?>" readonly>
-            <textarea type="text" name="comment" required></textarea>
-            <button type="submit" name="submit">ADD COMMENT</button>
-            <input type="hidden" name="post_id" value="<?= $post_id; ?>">
-            <?php //die(var_dump($_GET['post_id'])); ?>
-        </form>
-        </div>
-    </section>
+    <main>
+        <section class="formContainer">
+            <h2>Write a comment</h2>
+            <form action="app/comments/submitComment.php" method="post">
+                <!-- post info -->
+                <input type="text" value="<?php echo $post['title'] ?>" readonly>
+                <input type="hidden" name="post_id" value="<?= $post_id; ?>">
+                <!-- comment input -->
+                <textarea type="text" name="comment" required></textarea>
+                <button type="submit" name="submit">ADD COMMENT</button>
+            </form>
+</div>
+</section>
 </main>
 
 <?php require __DIR__ . '/views/footer.php'; ?>

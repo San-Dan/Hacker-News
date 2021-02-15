@@ -6,11 +6,16 @@ require __DIR__ . '/views/header.php';
     <table class="tablePosts">
         <!-- SORT POSTS BY DATE OR VOTES -->
         <?php if (isset($_GET['order'])) {
-            $posts = getTopPosts($pdo); // FUNKAR INTE??
+            $posts = getTopPosts($pdo);
         } else {
             $posts = getLatestPosts($pdo);
         } ?>
+
         <!------- POSTS -------------->
+        <p><?php if (isset($_SESSION['msg'])) {
+                echo $_SESSION['msg'];
+                unset($_SESSION['msg']);
+            }; ?></p>
         <tbody class="tbodyPost">
             <tr>
                 <th>#</th>
@@ -30,7 +35,7 @@ require __DIR__ . '/views/header.php';
                         <td><button type="submit" name="show">See Comments</button></td>
                     </form>
                     <?php if (isset($_SESSION['user'])) : ?>
-                        <form action="/app/posts/upvotes.php" method="POST">
+                        <form action="/app/posts/upvotes.php" method="post">
                             <td><button type="submit" name="upvote">Me like!</button></td>
                         </form>
                         <form action="/addComment.php?post_id=<?= $post['id'] ?>" method="POST">
