@@ -4,6 +4,19 @@ require __DIR__ . '/../autoload.php';
 
 // form action to THIS file in new file editPost.php
 
+$id = (int)$_SESSION['user']['id'];
+
+// posta id i hidden input? eller via ny knapp Edit post?
+$posts_id = (int)$_POST['post_id'];
+/*
+function getUsersPosts(PDO $pdo, int $id, int $posts_id)
+{
+    $statement = $pdo->prepare('SELECT * FROM posts INNER JOIN users WHERE users_id = :id');
+    $statement->execute();
+    $posts = $statement->fetch(PDO::FETCH_ASSOC);
+    return $posts;
+}
+*/
 
 
 if (isset($_SESSION['user'])) {
@@ -12,10 +25,10 @@ if (isset($_SESSION['user'])) {
         $link = trim(filter_var($_POST['link'], FILTER_SANITIZE_URL));
         $description = trim(filter_var($_POST['description'], FILTER_SANITIZE_STRING));
         $published = date("Y-m-d H:i:s");
-        $id = $_SESSION['user']['id'];
+        $id = (int)$_SESSION['user']['id'];
 
 
-// set as function createPost() {} instead?
+// set as function editPost() instead?
         $statement = $database->prepare('UPDATE posts
         SET (users_id, author, title, description, link, published) VALUES (:users_id, :author, :title, :description, :link, :published)');
         $statement->bindParam(':title', $title, PDO::PARAM_STR);
