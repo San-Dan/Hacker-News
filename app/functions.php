@@ -27,8 +27,6 @@ function validatePwd(string $pwd, string $pwdRep): bool
 }
 
 
-
-
 // POSTS FUNCTIONS
 
 // Extended error info: if (!$statement) { die(var_dump($pdo->errorInfo())); }
@@ -108,6 +106,7 @@ function getComments(PDO $pdo, int $posts_id)
     $comments = $statement->fetch(PDO::FETCH_ASSOC);
     return $comments;
 }
+
 // USER FUNCTIONS
 //----------------------------------
 /*function bla() {
@@ -121,7 +120,7 @@ function getComments(PDO $pdo, int $posts_id)
 function getUserById(PDO $pdo, int $id)
 {
     $statement = $pdo->prepare('SELECT * FROM users WHERE id = :id');
-    $statement->bindParam(':id', $id, PDO::PARAM_STR);
+    $statement->bindParam(':id', $id, PDO::PARAM_INT);
     $statement->execute();
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 

@@ -16,3 +16,5 @@ require __DIR__ . '/functions.php';
 
 // PDO connection
 $pdo = new PDO('sqlite:' . __DIR__ . '../../hackernews.sqlite');
+
+//die(var_dump($_SESSION['user']));

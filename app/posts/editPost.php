@@ -25,12 +25,10 @@ if (isset($_SESSION['user'])) {
         $link = trim(filter_var($_POST['link'], FILTER_SANITIZE_URL));
         $description = trim(filter_var($_POST['description'], FILTER_SANITIZE_STRING));
         $published = date("Y-m-d H:i:s");
-        $id = (int)$_SESSION['user']['id'];
 
 
 // set as function editPost() instead?
-        $statement = $database->prepare('UPDATE posts
-        SET (users_id, author, title, description, link, published) VALUES (:users_id, :author, :title, :description, :link, :published)');
+        $statement = $pdo->prepare('UPDATE posts SET (title, description, link, published) VALUES (:title, :description, :link, :published)');
         $statement->bindParam(':title', $title, PDO::PARAM_STR);
         $statement->bindParam(':users_id', $id, PDO::PARAM_INT);
         $statement->bindParam(':link', $link, PDO::PARAM_STR);

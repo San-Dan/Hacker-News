@@ -3,11 +3,10 @@ require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/views/header.php';
 
 if (!isset($_SESSION['user'])) {
-        redirect('../../login.php');
+        redirect('../../index.php');
 }
 $id = (int)$_SESSION['user']['id'];
 $user = getUserById($pdo, $id);
-//<?php die(var_dump($user)); ?>
 ?>
 
 <main class="profileMain">
@@ -23,14 +22,16 @@ $user = getUserById($pdo, $id);
         <h3>Bio </h3>
         <div class="bioBox"><?= $user['bio'];?> </div>
         <form action="/editProfile.php">
-        <button type="submit">Edit Info</button>
+            <button type="submit">Edit Info</button>
         </form>
     </section>
 
     <section class="pwdSection">
         <h2>PASSWORD</h2>
         <p>Remember to choose a unique password, stay safe out there!</p>
-        <button>Change Password</button>
+        <form action="/editProfile.php">
+            <button type="submit">Change Password</button>
+        </form>
     </section>
 
 </main>

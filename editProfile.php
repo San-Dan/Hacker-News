@@ -8,6 +8,8 @@ if (!isset($_SESSION['user'])) {
 
 $id = (int)$_SESSION['user']['id'];
 $user = getUserById($pdo, $id);
+
+//die(var_dump($id));
 ?>
 
 <main class="profileMain">
@@ -35,6 +37,11 @@ $user = getUserById($pdo, $id);
     <form class="editForm" action="/app/profile/editPwd.php" method="post">
         <h2>PASSWORD</h2>
         <p>Remember to choose a unique password, stay safe out there!</p>
+        <label for="pwd">Old Password</label>
+        <input type="password" name="oldPwd" placeholder="Old password">
+        <label for="pwd">New Password</label>
+        <input type="password" name="newPwd" placeholder="New password">
+        <input type="password" name="newPwdRep" placeholder="Repeat new password">
         <button type="submit">Change Password</button>
     </form>
     </section>
