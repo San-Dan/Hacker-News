@@ -25,24 +25,30 @@ require __DIR__ . '/views/header.php';
                 <th>Votes</th>
             </tr>
             <?php foreach ($posts as $post) : ?>
-                <tr>
-                    <td><?php echo $post['published']; ?></td>
-                    <td><?php echo $post['author']; ?></td>
-                    <td><a href="<?php echo $post['link']; ?>"> <?php echo $post['title']; ?></a></td>
-                    <td><?php echo $post['description']; ?></td>
-                    <td><?php echo $post['upvotes']; ?></td>
-                    <form action="/index.php" method="POST">
-                        <td><button type="submit" name="show">See Comments</button></td>
-                    </form>
-                    <?php if (isset($_SESSION['user'])) : ?>
-                        <form action="/app/posts/upvotes.php" method="post">
-                            <td><button type="submit" name="upvote">Me like!</button></td>
+                <tr class="row-post">
+                    <td><?= $post['published']; ?></td>
+                    <td><?= $post['author']; ?></td>
+                    <td><a href="<?= $post['link']; ?>"> <?= $post['title']; ?></a></td>
+                    <td><?= $post['description']; ?></td>
+                    <td><?= $post['upvotes']; ?></td>
+                    <td>
+                        <!-- SEE COMMENTS -->
+                        <form action="/index.php" method="POST">
+                            <input type="hidden" name="<?= $post['id']; ?>">
+                            <button type="submit" name="show">Comments</button>
                         </form>
-                        <form action="/addComment.php?post_id=<?= $post['id'] ?>" method="POST">
-                            <td><button type="submit" name="comment">Add Comment</button></td>
-                        </form>
+                        <?php if (isset($_SESSION['user'])) : ?>
+                            <!-- UPVOTE POST -->
+                            <form action="/app/posts/upvotes.php" method="post">
+                                <button type="submit" name="upvote">Me like!</button>
+                            </form>
+                            <!-- ADD COMMENT -->
+                            <form action="/addComment.php?post_id=<?= $post['id'] ?>" method="POST">
+                                <button type="submit" name="comment">Reply</button>
+                            </form>
+                    </td>
+                        <?php endif; ?>
 
-                    <?php endif; ?>
                 </tr>
         </tbody>
         <!------------------- COMMENTS ------------------------>

@@ -24,7 +24,7 @@
             <?php if (isset($_SESSION['user'])) : ?>
                 <a href="createPost.php" class="bold">Create Post</a>
                 <a href="profile.php" class="bold">My Profile</a>
-                <a href="app/users/logout.php" class="bold">Log Out</a>
+                <a href="app/users/logout.php" class="bold" >Log Out</a>
             <?php else : ?>
                 <a href="login.php" class="bold">Sign Up</a>
                 <a href="login.php" class="bold">Sign In</a>

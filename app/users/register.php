@@ -18,16 +18,16 @@ if (isset($_POST['submit'])) {
 
     if (!isset($name, $username)) {
         $_SESSION['error'] = 'Oops, something is missing! Please check all fields';
-        redirect('../login.php');
+        redirect('../../login.php');
     }
     if (!validateEmail($email)) {
         $_SESSION['error'] = 'Please enter a valid email address.';
-        redirect('../login.php');
+        redirect('../../login.php');
     }
 
     if (!validatePwd($pwd, $pwdRep)) {
         $_SESSION['error'] = 'Passwords did not match, try again!';
-        redirect('../login.php');
+        redirect('../../login.php');
     }
 }
 

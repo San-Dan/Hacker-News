@@ -1,9 +1,10 @@
 .boxXL {
   margin: 2rem;
-  height: 72vh;
+
   z-index: 1;
   max-width: 1000px;
   margin-top: 120px;
+
 }
 
 .boxXL h1 {
@@ -11,9 +12,9 @@
   margin-bottom: 1rem;
 }
 
-table {
+.tablePosts {
   max-height: fit-content;
-  width: 400px;
+  min-width: 350px;
   border: slategray;
   border-style: solid;
 }
@@ -23,6 +24,24 @@ th {
   border: 1px dotted #dddddd;
   text-align: left;
   padding: 8px;
+}
+
+.row-post {
+    height: 70px;
+}
+
+.row-btns {
+  max-height: 50px;
+}
+
+.row-btns td{
+  max-height: 50px;
+  padding:0;
+  margin-top: 0;
+}
+
+.row-btns button {
+  height: 30px;
 }
 
 @media screen and (min-width: 1280px) {
