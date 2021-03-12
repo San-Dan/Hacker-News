@@ -27,14 +27,20 @@ require __DIR__ . '/views/header.php';
             <?php foreach ($posts as $post) : ?>
                 <tr class="row-post">
                     <td><?= $post['published']; ?></td>
-                    <td><?= $post['author']; ?></td>
+                    <td><?php if($post['author'] == $_SESSION['user']['username']): ?>
+                             <b><?= $post['author']; ?></b>
+                             <button type="submit" name="edit">Edit Post</button>
+                        <?php else:
+                            echo $post['author']; ?>
+                        <?php endif; ?>
+                    </td>
                     <td><a href="<?= $post['link']; ?>"> <?= $post['title']; ?></a></td>
                     <td><?= $post['description']; ?></td>
                     <td><?= $post['upvotes']; ?></td>
                     <td>
                         <!-- SEE COMMENTS -->
-                        <form action="/index.php" method="POST">
-                            <input type="hidden" name="<?= $post['id']; ?>">
+                        <form action="/singlePost.php" method="POST">
+                            <input type="hidden" name="id" value="<?= $post['id']; ?>">
                             <button type="submit" name="show">Comments</button>
                         </form>
                         <?php if (isset($_SESSION['user'])) : ?>
@@ -47,7 +53,7 @@ require __DIR__ . '/views/header.php';
                                 <button type="submit" name="comment">Reply</button>
                             </form>
                     </td>
-                        <?php endif; ?>
+                <?php endif; ?>
 
                 </tr>
         </tbody>
@@ -56,13 +62,14 @@ require __DIR__ . '/views/header.php';
             <?php if (isset($_POST['show'])) :
                     $posts_id = $post['id']; // How do I get the id?
                     $comments = getComments($pdo, $posts_id);
-                    foreach ($comments as $comment) : // Warning: foreach() argument must be of type array|object, bool given
-            ?>
-                    <tr>
-                        <th colspan="6">Comment by <?php echo $comment['users_username'] ?> on <?php echo $comment['published']; ?></th>
-                        <td colspan="5">comment</td>
-                    </tr>
-                <?php endforeach; ?>
+                    if ($comments) :
+                        foreach ($comments as $comment) : ?>
+                        <tr>
+                            <th colspan="6">Comment by <?= $comment['users_username']; ?> on <?= $comment['published']; ?></th>
+                            <td colspan="5">comment</td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             <?php endif; ?>
             <tr class="spaceRow"> </tr>
         </tbody>

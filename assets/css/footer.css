@@ -3,6 +3,8 @@ footer {
   text-align: center;
   font-family: 'Arial';
   font-size: 1.2rem;
+  position: fixed;
+  bottom: 0;
   padding: 15px;
   height: 9rem;
   width: 100%;
@@ -30,6 +32,8 @@ nav a {
     text-align: center;
     font-family: 'Arial';
     font-size: 1.5rem;
+    position: fixed;
+    bottom: 0;
     padding: 15px;
     height: 110px;
     width: 100%;

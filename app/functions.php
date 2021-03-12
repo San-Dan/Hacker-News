@@ -98,10 +98,10 @@ function createComment(PDO $pdo, int $users_id, int $posts_id, string $author, s
     return $comment[0];
 }
 
-function getComments(PDO $pdo, int $posts_id)
+function getComments(PDO $pdo, int $post_id)
 {
     $statement = $pdo->prepare('SELECT * FROM comments WHERE posts_id = :posts_id');
-    $statement->bindParam(':posts_id', $posts_id, PDO::PARAM_INT);
+    $statement->bindParam(':posts_id', $post_id, PDO::PARAM_INT);
     $statement->execute();
     $comments = $statement->fetch(PDO::FETCH_ASSOC);
     return $comments;
