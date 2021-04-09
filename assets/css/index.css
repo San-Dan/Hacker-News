@@ -1,10 +1,9 @@
 .boxXL {
   margin: 2rem;
-
+  min-height: 100vh;
   z-index: 1;
   max-width: 1000px;
   margin-top: 120px;
-
 }
 
 .boxXL h1 {
@@ -17,6 +16,7 @@
   min-width: 350px;
   border: slategray;
   border-style: solid;
+  margin-left: 2rem;
 }
 
 td,
@@ -27,16 +27,16 @@ th {
 }
 
 .row-post {
-    height: 70px;
+  height: 70px;
 }
 
 .row-btns {
   max-height: 50px;
 }
 
-.row-btns td{
+.row-btns td {
   max-height: 50px;
-  padding:0;
+  padding: 0;
   margin-top: 0;
 }
 

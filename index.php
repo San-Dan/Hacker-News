@@ -27,11 +27,15 @@ require __DIR__ . '/views/header.php';
             <?php foreach ($posts as $post) : ?>
                 <tr class="row-post">
                     <td><?= $post['published']; ?></td>
-                    <td><?php if($post['author'] == $_SESSION['user']['username']): ?>
-                             <b><?= $post['author']; ?></b>
-                             <button type="submit" name="edit">Edit Post</button>
-                        <?php else:
-                            echo $post['author']; ?>
+                    <td><?php if (isset($_SESSION['user'])) : ?>
+                            <?php if ($post['author'] === $_SESSION['user']['username']) : ?>
+                                <b><?= $post['author']; ?></b>
+                                <form action="/editPost.php?post_id=<?= $post['id'] ?>" method="POST">
+                                    <button type="submit" name="edit">Edit Post</button>
+                                </form>
+                            <?php else :
+                                echo $post['author']; ?>
+                            <?php endif; ?>
                         <?php endif; ?>
                     </td>
                     <td><a href="<?= $post['link']; ?>"> <?= $post['title']; ?></a></td>

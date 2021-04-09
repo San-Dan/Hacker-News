@@ -18,7 +18,7 @@ $post = getOnePost($pdo, $post_id);
             <h2>Write a comment</h2>
             <form action="app/comments/submitComment.php" method="post">
                 <!-- post info -->
-                <input type="text" value="<?php echo $post['title'] ?>" readonly>
+                <input type="text" value="<?= $post['title'] ?>" readonly>
                 <input type="hidden" name="post_id" value="<?= $post_id; ?>">
                 <!-- comment input -->
                 <textarea type="text" name="comment" required></textarea>

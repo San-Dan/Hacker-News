@@ -81,6 +81,8 @@ function createPost(PDO $pdo, string $title, int $users_id, string $author, stri
 }
 
 
+
+
 // COMMENT FUNCTIONS
 //------------------------------------------
 
@@ -100,9 +102,10 @@ function createComment(PDO $pdo, int $users_id, int $posts_id, string $author, s
 
 function getComments(PDO $pdo, int $post_id)
 {
-    $statement = $pdo->prepare('SELECT * FROM comments WHERE posts_id = :posts_id');
+    $statement = $pdo->prepare('SELECT * FROM comments WHERE posts_id = :posts_id ORDER BY published DESC');
     $statement->bindParam(':posts_id', $post_id, PDO::PARAM_INT);
     $statement->execute();
+
     $comments = $statement->fetch(PDO::FETCH_ASSOC);
     return $comments;
 }
@@ -152,6 +155,3 @@ function createUser(PDO $pdo, string $name, string $username, string $email, str
     $statement->bindParam(':pwd', $hashedPwd, PDO::PARAM_STR);
     $statement->execute();
 }
-
-// Läs noga här https://phpdelusions.net/pdo#query
-// och här (om execute+bindParam): https://doc.bccnsoft.com/docs/php-docs-7-en/pdostatement.execute.html
