@@ -46,7 +46,7 @@ require __DIR__ . '/views/header.php';
         <?php endif; ?>
         <!----------- COMMENTS -------------->
         <tbody class="tbodyComment">
-            <?php if (getComments($pdo, $post_id) === true) :
+            <?php if (getComments($pdo, $post_id) !== false) :
                 $comments = getComments($pdo, $post_id);
                 // die(var_dump($comments));
 

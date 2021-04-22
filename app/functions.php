@@ -106,7 +106,7 @@ function getComments(PDO $pdo, int $post_id)
     $statement->bindParam(':posts_id', $post_id, PDO::PARAM_INT);
     $statement->execute();
 
-    $comments = $statement->fetch(PDO::FETCH_ASSOC);
+    $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $comments;
 }
 
