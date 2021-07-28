@@ -15,7 +15,6 @@ if (isset($_POST['submit'])) {
 
     // VALIDATE + SANITIZE
 
-
     if (!isset($name, $username)) {
         $_SESSION['error'] = 'Oops, something is missing! Please check all fields';
         redirect('../../login.php');

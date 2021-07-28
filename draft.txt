@@ -55,3 +55,79 @@ VALUES (9, 'Wordpress rules!', 'crazy shit', '2021-01-28 14:55:23');
 
 INSERT INTO posts (users_id, author, title, description, published)
 VALUES (4, 'nover3', 'Google did what??', 'crazy shit', '2021-01-05 11:55:23');
+
+<!------------------- COMMENTS (försökte att ha under posts på index)------------------------>
+        <tbody class="tbodyComment">
+            <?php if (isset($_POST['show'])) :
+                    $posts_id = $post['id']; // How do I get the id?
+                    $comments = getComments($pdo, $posts_id);
+                    if ($comments) :
+                        foreach ($comments as $comment) : ?>
+                        <tr>
+                            <th colspan="6">Comment by <?= $comment['users_username']; ?> on <?= $comment['published']; ?></th>
+                            <td colspan="5">comment</td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            <?php endif; ?>
+            <tr class="spaceRow"> </tr>
+        </tbody>
+
+<!-- ADD COMMENT (på indexsidan, onödigt och otydligt. User får klicka in på Comments och sen kunna reply) -->
+  <!-- <form action="/addComment.php?post_id=<?= $post['id'] ?>" method="POST">
+  <button type="submit" name="comment">Reply</button>
+  </form> -->
+
+<!-- singlePost.php, under update comment-form -->
+                <!-- <?php //else : ?>
+                    <th colspan="6">Comment by <?= $comment['author']; ?> on <?= $comment['published']; ?></th>
+                    <tr>
+                        <td colspan="5"><?= $comment['text']; ?></td>
+                    </tr> -->
+                <!-- <?php// endif; ?> -->
+
+                <!-- </tr> -->
+
+
+// if (!getUsersUpvotes($pdo, $post_id, $username)) {
+        //     // INSERT INTO UPVOTES TABLE
+        //     $statement = $pdo->prepare('INSERT INTO upvotes (post_id, liked_by, all_upvotes) VALUES (:post_id, :liked_by, :all_upvotes)');
+        //     $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+        //     $statement->bindParam(':liked_by', $username, PDO::PARAM_STR);
+        //     $statement->bindParam(':all_upvotes', $newTotal, PDO::PARAM_INT);
+        //     $statement->execute();
+
+        //     // INSERT INTO POSTS TABLE
+        //     $statement = $pdo->prepare('UPDATE posts SET upvotes = :upvotes WHERE id = :post_id');
+        //     $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+        //     $statement->bindParam(':upvotes', $newTotal, PDO::PARAM_INT);
+        //     $statement->execute();
+
+        //     $_SESSION['msg'] = 'Good choice! You liked the best post yet :)';
+        //     redirect('../../index.php');
+        // } else {
+        //     // DELETE UPVOTE
+        //     $statement = $pdo->prepare('DELETE FROM upvotes WHERE post_id = :post_id AND liked_by = :username');
+        //     $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+        //     $statement->bindParam(':liked_by', $username, PDO::PARAM_STR);
+        //     $statement->execute();
+
+        //     $_SESSION['msg'] = 'Your upvote was removed';
+        //     redirect('../../index.php');
+        // }
+
+<!-- UPVOTE POST -->
+                        <?php if (isset($_SESSION['user'])) : ?>
+                            <?php if (getUsersUpvotes($pdo, $post_id, $username) == true) : ?>
+                                <form action="/app/posts/upvotes.php" method="post">
+                                    <input type="hidden" name="id" value="<?= $post['id']; ?>">
+                                    <button type="submit" name="upvote">Me liked!</button>
+                                </form>
+                            <?php else : ?>
+                                <form action="/app/posts/upvotes.php" method="post">
+                                    <input type="hidden" name="id" value="<?= $post['id']; ?>">
+                                    <button type="submit" name="upvote">Me like!</button>
+                                </form>
+                            <?php endif; ?>
+                    </td>
+                <?php endif; ?>

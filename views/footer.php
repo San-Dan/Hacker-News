@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <footer>
     <nav>
         <a href="xx">About Us</a>
@@ -9,5 +6,9 @@
         <a href="xx">Contact</a>
     </nav>
 </footer>
+<!-- <script src="/assets/js/app.js"></script> -->
 </body>
+
+<script src="/assets/js/app.js"></script>
+
 </html>

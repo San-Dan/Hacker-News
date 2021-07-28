@@ -9,11 +9,12 @@ if (isset($_SESSION['user'])) {
         $title = trim(filter_var($_POST['title'], FILTER_SANITIZE_STRING));
         $link = trim(filter_var($_POST['link'], FILTER_SANITIZE_URL));
         $description = trim(filter_var($_POST['info'], FILTER_SANITIZE_STRING));
+        $upvotes = 0;
         $published = date("Y-m-d H:i:s");
         $users_id = (int)$_SESSION['user']['id'];
         $author = $_SESSION['user']['username'];
 
-        createPost($pdo, $title, $users_id, $author, $description, $link, $published);
+        createPost($pdo, $title, $users_id, $author, $description, $link, $upvotes, $published);
         $_SESSION['msg'] = 'Your post was successfully published!';
         redirect('../../index.php');
     }

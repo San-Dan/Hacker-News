@@ -26,6 +26,11 @@ th {
   padding: 8px;
 }
 
+.tr-sm {
+  font-size: 14px;
+  padding: 4px;
+}
+
 .row-post {
   height: 70px;
 }

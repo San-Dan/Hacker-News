@@ -33,14 +33,15 @@ require __DIR__ . '/views/header.php';
                         <?php if (isset($_SESSION['user'])) : ?>
                             <!-- UPVOTE POST -->
                             <form action="/app/posts/upvotes.php" method="post">
+                                <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
                                 <button type="submit" name="upvote">Me like!</button>
                             </form>
                             <!-- ADD COMMENT -->
                             <form action="/addComment.php?post_id=<?= $post['id']; ?>" method="POST">
                                 <button type="submit" name="comment">Reply</button>
                             </form>
+                        <?php endif; ?>
                     </td>
-                <?php endif; ?>
                 </tr>
             </tbody>
         <?php endif; ?>
@@ -50,24 +51,55 @@ require __DIR__ . '/views/header.php';
                 $comments = getComments($pdo, $post_id);
                 // die(var_dump($comments));
 
-                foreach ($comments as $comment) :
-            ?>
-                    <tr>
-                        <th colspan="6">Comment by <?= $comment['author']; ?> on <?= $comment['published']; ?></th>
-                        <td colspan="5"><?= $comment['text']; ?></td>
+                foreach ($comments as $comment) :  ?>
+                    <!-- COMMENT INFO -->
+                    <tr class="tr-sm">
+                        <td colspan="4" class="tr-sm">Comment by <?= $comment['author']; ?> on <?= $comment['published']; ?> </td>
+                        <?php if ($comment['author'] === $_SESSION['user']['username']) : ?>
+                            <td>
+                                <form action="app/comments/deleteComment.php" method="post" class="form-sm">
+                                    <input type="hidden" name="comment_id" value="<?= $comment['id'] ?>">
+                                    <button type="submit" name="delete" class="btn-sm">Delete</button>
+                                </form>
+                            </td>
+                            <td> <button class="btn-sm toggle-form">Edit comment</button> </td>
                     </tr>
-                <?php endforeach;
-                ?>
-            <?php else : ?>
-                <?php //die(var_dump($comments));
-                ?>
-                <tr>
-                    <td colspan="6">No comments yet</td>
-                </tr>
-            <?php endif;
-            ?>
 
-            <tr class="spaceRow"> </tr>
+                    <!-- COMMENT TEXT -->
+                    <tr>
+                        <td colspan="6"><?= $comment['text']; ?></td>
+                    </tr>
+
+                    <!-- EDIT COMMENT FORM (default display:none)-->
+                    <tr class="editCommentForm">
+                        <td colspan="6">
+                            <form action="app/comments/updateComment.php" method="POST">
+                                <input type="text" name="comment" placeholder="Update existing comment here">
+                                <input type="hidden" name="comment_id" value="<?= $comment['id'] ?>">
+                                <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
+                                <button type="submit" name="edit">Update comment</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php else : ?>
+                    <!-- COMMENT TEXT -->
+                    <tr>
+                        <td colspan="6"><?= $comment['text']; ?></td>
+                    </tr>
+                <?php endif; ?>
+
+
+
+
+            <?php endforeach; ?>
+        <?php else : ?>
+
+            <tr>
+                <td colspan="6">No comments yet</td>
+            </tr>
+        <?php endif;   ?>
+
+        <tr class="spaceRow"> </tr>
         </tbody>
 
     </table>

@@ -28,8 +28,6 @@ function validatePwd(string $pwd, string $pwdRep): bool
 
 
 // POSTS FUNCTIONS
-
-// Extended error info: if (!$statement) { die(var_dump($pdo->errorInfo())); }
 //----------------------------------
 function getTopPosts(PDO $pdo)
 {
@@ -64,23 +62,21 @@ function getUsersPosts(PDO $pdo, int $id, int $posts_id)
     return $posts;
 }
 
-
-function createPost(PDO $pdo, string $title, int $users_id, string $author, string $description, string $link, string $published)
+function createPost(PDO $pdo, string $title, int $users_id, string $author, string $description, string $link, int $upvotes, string $published)
 {
-    $statement = $pdo->prepare('INSERT INTO posts (users_id, author, title, description, link, published) VALUES (:users_id, :author, :title, :description, :link, :published)');
+    $statement = $pdo->prepare('INSERT INTO posts (users_id, author, title, description, link, upvotes, published) VALUES (:users_id, :author, :title, :description, :link, :upvotes, :published)');
     $statement->bindParam(':title', $title, PDO::PARAM_STR);
     $statement->bindParam(':users_id', $users_id, PDO::PARAM_INT);
     $statement->bindParam(':author', $author, PDO::PARAM_STR);
     $statement->bindParam(':link', $link, PDO::PARAM_STR);
     $statement->bindParam(':description', $description, PDO::PARAM_STR);
+    $statement->bindParam(':upvotes', $upvotes, PDO::PARAM_INT);
     $statement->bindParam(':published', $published, PDO::PARAM_STR);
     $statement->execute();
 
     $post = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $post[0];
 }
-
-
 
 
 // COMMENT FUNCTIONS
@@ -146,12 +142,20 @@ function createUser(PDO $pdo, string $name, string $username, string $email, str
     $statement = $pdo->prepare('INSERT INTO users (name, username, email, pwd) VALUES (:name, :username, :email, :pwd)');
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-    if (!$statement) {
-        die(var_dump($pdo->errorInfo()));
-    }
     $statement->bindParam(':name', $name, PDO::PARAM_STR);
     $statement->bindParam(':username', $username, PDO::PARAM_STR);
     $statement->bindParam(':email', $email, PDO::PARAM_STR);
     $statement->bindParam(':pwd', $hashedPwd, PDO::PARAM_STR);
     $statement->execute();
+}
+
+function getUsersUpvotes(PDO $pdo, int $post_id, string $username)
+{
+    $statement = $pdo->prepare('SELECT * FROM upvotes WHERE post_id = :post_id AND liked_by = :username');
+    $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+    $statement->bindParam(':username', $username, PDO::PARAM_STR);
+    $statement->execute();
+
+    $upvotes = $statement->fetch(PDO::FETCH_ASSOC);
+    return $upvotes;
 }

@@ -47,36 +47,21 @@ require __DIR__ . '/views/header.php';
                             <input type="hidden" name="id" value="<?= $post['id']; ?>">
                             <button type="submit" name="show">Comments</button>
                         </form>
+                        <!-- UPVOTE POST -->
                         <?php if (isset($_SESSION['user'])) : ?>
-                            <!-- UPVOTE POST -->
+
                             <form action="/app/posts/upvotes.php" method="post">
+                                <input type="hidden" name="id" value="<?= $post['id']; ?>">
                                 <button type="submit" name="upvote">Me like!</button>
                             </form>
-                            <!-- ADD COMMENT -->
-                            <form action="/addComment.php?post_id=<?= $post['id'] ?>" method="POST">
-                                <button type="submit" name="comment">Reply</button>
-                            </form>
+
                     </td>
                 <?php endif; ?>
 
+
                 </tr>
         </tbody>
-        <!------------------- COMMENTS ------------------------>
-        <tbody class="tbodyComment">
-            <?php if (isset($_POST['show'])) :
-                    $posts_id = $post['id']; // How do I get the id?
-                    $comments = getComments($pdo, $posts_id);
-                    if ($comments) :
-                        foreach ($comments as $comment) : ?>
-                        <tr>
-                            <th colspan="6">Comment by <?= $comment['users_username']; ?> on <?= $comment['published']; ?></th>
-                            <td colspan="5">comment</td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            <?php endif; ?>
-            <tr class="spaceRow"> </tr>
-        </tbody>
+
     <?php endforeach; ?>
 
     </table>
