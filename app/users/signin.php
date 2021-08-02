@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
         unset($user['pwd']);
         $_SESSION['user'] = [
             'username' => $user['username'],
-            'avatar' => $user['avatar'],
+            'profileimg' => $user['profileimg'],
             'email' => $user['email'],
             'bio' => $user['bio'],
             'id' => $user['id']

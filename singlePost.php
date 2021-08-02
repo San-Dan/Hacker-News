@@ -62,7 +62,7 @@ require __DIR__ . '/views/header.php';
                                     <button type="submit" name="delete" class="btn-sm">Delete</button>
                                 </form>
                             </td>
-                            <td> <button class="btn-sm toggle-form">Edit comment</button> </td>
+                            <!-- <td> <button class="btn-sm toggle-form">Edit comment</button> </td> -->
                     </tr>
 
                     <!-- COMMENT TEXT -->

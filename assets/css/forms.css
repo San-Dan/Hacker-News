@@ -117,5 +117,9 @@ input[type="password"] {
 }
 
 .editCommentForm {
-  display: none;
+  display: block;
+}
+
+.showEditForm {
+  display: block;
 }
