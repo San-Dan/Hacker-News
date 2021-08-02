@@ -3,7 +3,7 @@ require __DIR__ . '/app/autoload.php';
 require __DIR__ . '/views/header.php';
 
 if (!isset($_SESSION['user'])) {
-        redirect('../../index.php');
+    redirect('../../index.php');
 }
 $id = (int)$_SESSION['user']['id'];
 $user = getUserById($pdo, $id);
@@ -11,18 +11,22 @@ $user = getUserById($pdo, $id);
 
 <main class="profileMain">
     <section class="profile-container">
-    <p><?php if (isset($_SESSION['msg'])) {
+        <p><?php if (isset($_SESSION['msg'])) {
                 echo $_SESSION['msg'];
                 unset($_SESSION['msg']);
             }; ?></p>
         <h2>PROFILE PAGE</h2>
-        <img src="assets/profile.jpg" alt="avatar">
+        <?php if ($user['profileimg'] === null) : ?>
+            <img src="app/uploads/defaultprofile.jpg" alt="avatar">
+        <?php else : ?>
+            <img src="/app/uploads/<?= $_SESSION['user']['profileimg']; ?>" alt="profile image">
+        <?php endif; ?>
         <h3>Username: <?= $user['username']; ?> </h3>
-        <h3>Email: <?= $user['email'];?></h3>
+        <h3>Email: <?= $user['email']; ?></h3>
         <h3>Bio </h3>
-        <div class="bioBox"><?= $user['bio'];?> </div>
+        <div class="bioBox"><?= $user['bio']; ?> </div>
         <form action="/editProfile.php">
-            <button type="submit">Edit Info</button>
+            <button type="submit">Edit Profile</button>
         </form>
     </section>
 

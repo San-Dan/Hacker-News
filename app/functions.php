@@ -109,7 +109,7 @@ function getComments(PDO $pdo, int $post_id)
 // USER FUNCTIONS
 //----------------------------------
 /*function bla() {
-    die(var_dump($pdo->errorInfo()));
+    
 
     $statement->execute();
     $user = $statement->fetch(PDO::FETCH_ASSOC);

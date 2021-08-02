@@ -1,5 +1,9 @@
 // Show form for updating your own comments
 
+// hade querySelector(All) först
+const editCommentBtn = document.getElementsByClassName("toggle-form");
+const form = document.getElementsByClassName("editCommentForm");
+
 //ALT 1 - UTAN FUNKTION
 // ger error: Cannot read property 'addEventListener' of null
 // editCommentBtn.addEventListener("click", () => {
@@ -11,10 +15,10 @@
 // });
 //-----------------------------------
 
-// alt 2 - MED FUNKTION. Funkade ibland??
+// alt 2 - MED FUNKTION. Funkade ibland men inte längre??
 
 function openForm() {
-  let form = document.getElementsByClassName("editCommentForm");
+  // let form = document.getElementsByClassName("editCommentForm");
 
   if (form.style.display === "none") {
     form.style.display = "block";
@@ -22,7 +26,6 @@ function openForm() {
     form.style.display = "none";
   }
 }
-let editCommentBtn = document.getElementsByClassName("toggle-form");
 
 editCommentBtn.addEventListener("click", openForm());
 
