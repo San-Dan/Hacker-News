@@ -8,16 +8,17 @@ if (!isset($_SESSION['user'])) {
 
 $id = (int)$_SESSION['user']['id'];
 $user = getUserById($pdo, $id);
-$profileImg = $_SESSION['user']['profileimg'];
+$profileImg = $user['profileimg'];
+$imgUpload = __DIR__ . '/app/profile/uploads/' . $profileImg;
 
 ?>
 
 <main class="profileMain">
     <h2>PROFILE</h2>
-    <?php if (file_exists('/app/uploads' . $profileImg === false)) : ?>
-        <img src="/app/profile/uploads/defaultprofile.jpg" alt="avatar">
-    <?php else : ?>
+    <?php if (profileImgExists($imgUpload)) :  ?>
         <img src="/app/profile/uploads/<?= $profileImg ?>" alt="profile image">
+    <?php else : ?>
+        <img src="/app/profile/uploads/defaultprofile.jpg" alt="avatar">
     <?php endif; ?>
     <!-- CHANGE PROFILE PICTURE -->
     <form class="editForm" action="/app/profile/editImg.php" method="post" enctype="multipart/form-data">

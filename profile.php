@@ -20,11 +20,10 @@ $imgUpload = __DIR__ . '/app/profile/uploads/' . $profileImg;
                 unset($_SESSION['msg']);
             }; ?></p>
         <h2>PROFILE PAGE</h2>
-        <p></p>
-        <?php if (!profileImgExists($imgUpload)) : ?>
-            <img src="/app/profile/uploads/defaultprofile.jpg" alt="avatar">
-        <?php else : ?>
+        <?php if (profileImgExists($imgUpload)) : ?>
             <img src="/app/profile/uploads/<?= $profileImg ?>" alt="profile image">
+        <?php else : ?>
+            <img src="/app/profile/uploads/defaultprofile.jpg" alt="avatar">
         <?php endif; ?>
 
         <h3>Username: <?= $user['username']; ?> </h3>
