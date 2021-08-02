@@ -109,7 +109,7 @@ function getComments(PDO $pdo, int $post_id)
 // USER FUNCTIONS
 //----------------------------------
 /*function bla() {
-    
+
 
     $statement->execute();
     $user = $statement->fetch(PDO::FETCH_ASSOC);
@@ -135,6 +135,12 @@ function userExists(PDO $pdo, string $username, string $email)
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
     return $user;
+}
+
+function profileImgExists(string $imgUpload)
+{
+    file_exists($imgUpload);
+    return $imgUpload;
 }
 
 function createUser(PDO $pdo, string $name, string $username, string $email, string $pwd)

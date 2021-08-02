@@ -7,6 +7,10 @@ if (!isset($_SESSION['user'])) {
 }
 $id = (int)$_SESSION['user']['id'];
 $user = getUserById($pdo, $id);
+$profileImg = $user['profileimg'];
+$imgUpload = __DIR__ . '/app/profile/uploads/' . $profileImg;
+
+/* <?= die(var_dump($imgUpload)); ?> */
 ?>
 
 <main class="profileMain">
@@ -16,11 +20,13 @@ $user = getUserById($pdo, $id);
                 unset($_SESSION['msg']);
             }; ?></p>
         <h2>PROFILE PAGE</h2>
-        <?php if ($user['profileimg'] === null) : ?>
-            <img src="app/uploads/defaultprofile.jpg" alt="avatar">
+        <p></p>
+        <?php if (!profileImgExists($imgUpload)) : ?>
+            <img src="/app/profile/uploads/defaultprofile.jpg" alt="avatar">
         <?php else : ?>
-            <img src="/app/uploads/<?= $_SESSION['user']['profileimg']; ?>" alt="profile image">
+            <img src="/app/profile/uploads/<?= $profileImg ?>" alt="profile image">
         <?php endif; ?>
+
         <h3>Username: <?= $user['username']; ?> </h3>
         <h3>Email: <?= $user['email']; ?></h3>
         <h3>Bio </h3>

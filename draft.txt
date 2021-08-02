@@ -131,3 +131,11 @@ VALUES (4, 'nover3', 'Google did what??', 'crazy shit', '2021-01-05 11:55:23');
                             <?php endif; ?>
                     </td>
                 <?php endif; ?>
+
+
+<!-- <?php if (!$user['profileimg'] === null) :
+           if (file_exists('/app/uploads' . $profileImg === false)) : ?>
+            <img src="app/uploads/defaultprofile.jpg" alt="avatar">
+        <?php else : ?>
+            <img src="/app/uploads/<?= $_SESSION['user']['profileimg']; ?>" alt="profile image">
+        <?php endif; ?> -->

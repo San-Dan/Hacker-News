@@ -14,10 +14,10 @@ $profileImg = $_SESSION['user']['profileimg'];
 
 <main class="profileMain">
     <h2>PROFILE</h2>
-    <?php if (file_exists(__DIR__ . '/uploads/' . $profileImg === false)) : ?>
-        <img src="app/uploads/defaultprofile.jpg" alt="avatar">
+    <?php if (file_exists('/app/uploads' . $profileImg === false)) : ?>
+        <img src="/app/profile/uploads/defaultprofile.jpg" alt="avatar">
     <?php else : ?>
-        <img src="/app/uploads/<?= $profileImg ?>" alt="profile image">
+        <img src="/app/profile/uploads/<?= $profileImg ?>" alt="profile image">
     <?php endif; ?>
     <!-- CHANGE PROFILE PICTURE -->
     <form class="editForm" action="/app/profile/editImg.php" method="post" enctype="multipart/form-data">
