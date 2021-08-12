@@ -25,8 +25,6 @@ if (isset($_SESSION['user'])) {
                 if ($imgSize < 800000) {
                     $imgNameNew = "profileimg" . $id . "." . $imgActualExt;
                     $destination = __DIR__ . '/uploads/' . $imgNameNew;
-                    // die(var_dump($destination));
-
 
                     // New image to uploads
                     move_uploaded_file($imgTmpName, $destination);

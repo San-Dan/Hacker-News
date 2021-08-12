@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
             'bio' => $user['bio'],
             'id' => $user['id']
         ];
-        
+
         $_SESSION['msg'] = 'Welcome back, ' . $user['username'] . '!';
         redirect('../../index.php');
     }
@@ -37,30 +37,3 @@ if (isset($_POST['submit'])) {
         redirect('../../login.php');
     }
 }
-
-
-
-
-/*
-function userExists(PDO $pdo, string $username, string $email){
-    $statement = $pdo->prepare('SELECT * FROM users WHERE username = :username OR email = :email;');
-    $statement->bindParam(':username', $username, PDO::PARAM_STR);
-    $statement->bindParam(':email', $email, PDO::PARAM_STR);
-    $statement->execute();
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
-
-    return $user;
-}
-
-if (!userExists($pdo, $username, $email)) {
-        $_SESSION['error'] = 'No matching account found, try again!';
-        redirect('../../login.php');
-    }
-
-$found = userExists($username, $email);
-$found = $user
-if(isset($found))
-
-$statement->bindParam(':username', $input, PDO::PARAM_STR);
-    $statement->bindParam(':email', $input, PDO::PARAM_STR);
-*/
