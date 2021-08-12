@@ -143,16 +143,22 @@ function profileImgExists(string $imgUpload)
     return $imgUpload;
 }
 
-function createUser(PDO $pdo, string $name, string $username, string $email, string $pwd)
+function createUser(PDO $pdo, string $name, string $username, string $email, string $pwd, string $bio, string $profileImg)
 {
-    $statement = $pdo->prepare('INSERT INTO users (name, username, email, pwd) VALUES (:name, :username, :email, :pwd)');
+    $statement = $pdo->prepare('INSERT INTO users (name, username, email, pwd, bio, profileimg) VALUES (:name, :username, :email, :pwd, :bio, :profileimg)');
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
     $statement->bindParam(':name', $name, PDO::PARAM_STR);
     $statement->bindParam(':username', $username, PDO::PARAM_STR);
     $statement->bindParam(':email', $email, PDO::PARAM_STR);
     $statement->bindParam(':pwd', $hashedPwd, PDO::PARAM_STR);
+    $statement->bindParam(':bio', $bio, PDO::PARAM_STR);
+    $statement->bindParam(':profileimg', $profileImg, PDO::PARAM_STR);
     $statement->execute();
+
+    // Behövs en return? fetch eller fetchAll? Med [0]?
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+    return $user;
 }
 
 function getUsersUpvotes(PDO $pdo, int $post_id, string $username)

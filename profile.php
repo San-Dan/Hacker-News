@@ -5,12 +5,13 @@ require __DIR__ . '/views/header.php';
 if (!isset($_SESSION['user'])) {
     redirect('../../index.php');
 }
-$id = (int)$_SESSION['user']['id'];
+$id = (int)$_SESSION['user']['id']; 
 $user = getUserById($pdo, $id);
 $profileImg = $user['profileimg'];
 $imgUpload = __DIR__ . '/app/profile/uploads/' . $profileImg;
 
-/* <?= die(var_dump($imgUpload)); ?> */
+// die(var_dump($id));
+/* <?= die(var_dump($id)); ?> */
 ?>
 
 <main class="profileMain">

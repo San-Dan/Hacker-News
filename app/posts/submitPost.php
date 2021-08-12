@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
@@ -17,11 +18,8 @@ if (isset($_SESSION['user'])) {
         createPost($pdo, $title, $users_id, $author, $description, $link, $upvotes, $published);
         $_SESSION['msg'] = 'Your post was successfully published!';
         redirect('../../index.php');
-    }
-    else {
+    } else {
         $_SESSION['msg'] = 'Something went wrong, please try again!';
-         redirect('../../index.php');
+        redirect('../../index.php');
     }
-
 }
-

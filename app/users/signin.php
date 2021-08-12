@@ -16,6 +16,7 @@ if (isset($_POST['submit'])) {
 
     if ($user['username'] && password_verify($pwd, $user['pwd'])) {
         unset($user['pwd']);
+
         $_SESSION['user'] = [
             'username' => $user['username'],
             'profileimg' => $user['profileimg'],
@@ -23,8 +24,9 @@ if (isset($_POST['submit'])) {
             'bio' => $user['bio'],
             'id' => $user['id']
         ];
-
-        redirect('../../profile.php');
+        
+        $_SESSION['msg'] = 'Welcome back, ' . $user['username'] . '!';
+        redirect('../../index.php');
     }
     if (!isset($user['username'])) {
         $_SESSION['error'] = 'No matching account found, try again!';
@@ -57,7 +59,7 @@ if (!userExists($pdo, $username, $email)) {
 
 $found = userExists($username, $email);
 $found = $user
-if(iseet($found))
+if(isset($found))
 
 $statement->bindParam(':username', $input, PDO::PARAM_STR);
     $statement->bindParam(':email', $input, PDO::PARAM_STR);

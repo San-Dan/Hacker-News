@@ -16,6 +16,10 @@ require __DIR__ . '/app/autoload.php';
     <?php require __DIR__ . '/views/header.php'; ?>
     <main class="loginMain">
         <h1>Welcome, hackers!</h1>
+        <p><?php if (isset($_SESSION['msg'])) {
+                echo $_SESSION['msg'];
+                unset($_SESSION['msg']);
+            }; ?></p>
         <section class="signinForm formContainer">
             <h2 class="loginHeading">Sign in here</h2>
             <p><?php if (isset($_SESSION['error'])) {
